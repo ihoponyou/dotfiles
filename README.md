@@ -1,6 +1,6 @@
 # dotfiles
 
-inspired by **[unrealapex's dotfiles](https://git.sr.ht/~unrealapex/)**
+inspired by **[unrealapex's dotfiles](https://git.sr.ht/~unrealapex/dotfiles/)**
 
 ```
 wm: i3
