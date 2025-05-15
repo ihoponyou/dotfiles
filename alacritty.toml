@@ -1,5 +1,6 @@
 [font]
-normal = { family = "Monaspace Krypton", style = "Regular" }
+size = 10
+normal = { family = "Monaspace Neon", style = "Regular" }
 
 [terminal]
 shell = "bash"
