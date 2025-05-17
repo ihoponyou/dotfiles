@@ -22,13 +22,16 @@ endif
 make-dirs:
 	mkdir -p $(alacritty_config_dir)
 	mkdir -p $(neovim_config_dir)
+	mkdir -p $(xdg_config_home_default)
 
 link: make-dirs
 	ln -sf $(realpath .)/alacritty.toml $(alacritty_config_dir)
 	ln -sf $(realpath nvim) $(neovim_config_dir)
+	ln -sf $(realpath spotify-player) $(xdg_config_home_default)
 
 clean:
 	rm $(alacritty_config_dir)/alacritty.toml
 	rm $(neovim_config_dir)/nvim
+	rm $(xdg_config_home_default)/spotify-player
 
 .PHONY: all link make-dirs clean
