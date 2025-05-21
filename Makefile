@@ -9,6 +9,7 @@ ifeq ($(realpath xdg_config_home),$(an_unset_variable))
 xdg_config_home:=$(xdg_config_home_default)
 endif
 
+# i only use alacritty and neovim on both windows and linux
 # assuming shell properly accesses $APPDATA/$LOCALAPPDATA
 # works with bash
 ifeq ($(OS),Windows_NT)
@@ -27,11 +28,23 @@ make-dirs:
 link: make-dirs
 	ln -sf $(realpath .)/alacritty.toml $(alacritty_config_dir)
 	ln -sf $(realpath nvim) $(neovim_config_dir)
-	ln -sf $(realpath spotify-player) $(xdg_config_home_default)
+ifneq ($(OS),Windows_NT)
+	ln -sf $(realpath .)/.xinitrc ~
+	ln -sf $(realpath spotify-player) $(xdg_config_home)
+	ln -sf $(realpath i3) $(xdg_config_home)
+	ln -sf $(realpath i3status) $(xdg_config_home)
+	ln -sf $(realpath picom) $(xdg_config_home)
+endif
 
 clean:
 	rm $(alacritty_config_dir)/alacritty.toml
 	rm $(neovim_config_dir)/nvim
-	rm $(xdg_config_home_default)/spotify-player
+ifneq ($(OS),Windows_NT)
+	rm ~/.xinitrc
+	rm $(xdg_config_home)/spotify-player
+	rm $(xdg_config_home)/i3
+	rm $(xdg_config_home)/i3status
+	rm $(xdg_config_home)/picom
+endif
 
 .PHONY: all link make-dirs clean
