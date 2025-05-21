@@ -29,7 +29,6 @@ link: make-dirs
 	ln -sf $(realpath .)/alacritty.toml $(alacritty_config_dir)
 	ln -sf $(realpath nvim) $(neovim_config_dir)
 ifneq ($(OS),Windows_NT)
-	ln -sf $(realpath .)/.xinitrc ~
 	ln -sf $(realpath spotify-player) $(xdg_config_home)
 	ln -sf $(realpath i3) $(xdg_config_home)
 	ln -sf $(realpath i3status) $(xdg_config_home)
@@ -40,7 +39,6 @@ clean:
 	rm $(alacritty_config_dir)/alacritty.toml
 	rm $(neovim_config_dir)/nvim
 ifneq ($(OS),Windows_NT)
-	rm ~/.xinitrc
 	rm $(xdg_config_home)/spotify-player
 	rm $(xdg_config_home)/i3
 	rm $(xdg_config_home)/i3status
