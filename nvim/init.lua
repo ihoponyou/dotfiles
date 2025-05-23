@@ -1,5 +1,9 @@
 vim.opt.tabstop = 4
 
+if vim.fn.has 'win32' then
+  vim.o.shell = 'C://w64devkit//bin//bash.exe'
+end
+
 -- Set <space> as the leader key
 -- See `:help mapleader`
 --  NOTE: Must happen before plugins are loaded (otherwise wrong leader will be used)
@@ -176,11 +180,12 @@ require('lazy').setup({ { import = 'plugins' } }, {
 })
 
 require('luasnip.loaders.from_lua').load {
-  paths = { '~/AppData/Local/nvim/LuaSnip/' },
+  paths = { './lua/LuaSnip/' },
 }
 
--- vim.keymap.set('i', '{', '{}<ESC>i')
--- vim.keymap.set('i', '(', '()<ESC>i')
+-- allow vertical line navigation on long wrapped lines
+vim.keymap.set('n', 'j', 'gj')
+vim.keymap.set('n', 'k', 'gk')
 
 -- The line beneath this is called `modeline`. See `:help modeline`
 -- vim: ts=2 sts=2 sw=2 et
