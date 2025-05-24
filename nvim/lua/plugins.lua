@@ -1109,6 +1109,10 @@ return {
       'sindrets/diffview.nvim',
       'nvim-telescope/telescope.nvim',
     },
+    keys = {
+      { '<leader>gg', '<cmd>Neogit<cr>', desc = 'open Neo[g]it status buffer' },
+      { '<leader>gc', '<cmd>Neogit commit<cr>', desc = 'open Neo[g]it [c]ommit popup' },
+    },
     lazy = false,
   },
 }
