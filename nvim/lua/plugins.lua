@@ -1,5 +1,4 @@
 return {
-  'nvim-tree/nvim-web-devicons',
   -- Detect tabstop and shiftwidth automatically
   'tpope/vim-sleuth',
 
@@ -806,33 +805,6 @@ return {
     --    - Treesitter + textobjects: https://github.com/nvim-treesitter/nvim-treesitter-textobjects
   },
 
-  -- file tree
-  {
-    'nvim-neo-tree/neo-tree.nvim',
-    version = '*',
-    dependencies = {
-      'nvim-lua/plenary.nvim',
-      'nvim-tree/nvim-web-devicons', -- not strictly required, but recommended
-      'MunifTanjim/nui.nvim',
-    },
-    cmd = 'Neotree',
-    keys = {
-      { '\\', ':Neotree reveal<CR>', desc = 'NeoTree reveal', silent = true },
-    },
-    opts = {
-      filesystem = {
-        filtered_items = {
-          visible = true,
-        },
-        window = {
-          mappings = {
-            ['\\'] = 'close_window',
-          },
-        },
-      },
-    },
-  },
-
   -- auto brace closer
   {
     'windwp/nvim-autopairs',
@@ -1037,7 +1009,6 @@ return {
 
   {
     'L3MON4D3/LuaSnip',
-
     build = (function()
       -- Build Step is needed for regex support in snippets.
       -- This step is not supported in many windows environments.
@@ -1110,5 +1081,23 @@ return {
       enable_autosnippets = true,
       update_events = { 'TextChanged', 'TextChangedI' },
     },
+  },
+
+  -- file explorer
+  {
+    'stevearc/oil.nvim',
+    ---@module 'oil'
+    ---@type oil.SetupOpts
+    opts = {
+      use_default_keymaps = true,
+    },
+    keys = {
+      { '\\', '<cmd>Oil .<cr>', desc = 'open oil in cwd' },
+    },
+    -- Optional dependencies
+    -- dependencies = { { 'echasnovski/mini.icons', opts = {} } },
+    dependencies = { 'nvim-tree/nvim-web-devicons' }, -- use if you prefer nvim-web-devicons
+    -- Lazy loading is not recommended because it is very tricky to make it work correctly in all situations.
+    lazy = false,
   },
 }
