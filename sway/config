@@ -52,9 +52,8 @@ output DP-2 resolution 1920x1080@144Hz
 # You can get the names of your inputs by running: swaymsg -t get_inputs
 # Read `man 5 sway-input` for more information about this section.
 
-input "1189:32769:BenQ_ZOWIE_BenQ_ZOWIE_Gaming_Mouse" {
-    accel_profile "flat"
-}
+input type:pointer accel_profile "flat"
+input type:keyboard xkb_numlock on
 
 ### Key bindings
 #
