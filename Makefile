@@ -16,7 +16,7 @@ ifeq ($(OS),Windows_NT)
 alacritty_config_dir := $$APPDATA/alacritty
 neovim_config_dir := $$LOCALAPPDATA
 else
-alacritty_config_dir := $(xdg_config_home)
+alacritty_config_dir := $(xdg_config_home)/alacritty
 neovim_config_dir := $(xdg_config_home)
 endif
 
@@ -29,20 +29,14 @@ link: make-dirs
 	ln -sf $(realpath .)/alacritty.toml $(alacritty_config_dir)
 	ln -sf $(realpath nvim) $(neovim_config_dir)
 ifneq ($(OS),Windows_NT)
-	ln -sf $(realpath spotify-player) $(xdg_config_home)
-	ln -sf $(realpath i3) $(xdg_config_home)
-	ln -sf $(realpath i3status) $(xdg_config_home)
-	ln -sf $(realpath picom) $(xdg_config_home)
+	ln -sf $(realpath sway) $(xdg_config_home)
 endif
 
 clean:
 	rm $(alacritty_config_dir)/alacritty.toml
 	rm $(neovim_config_dir)/nvim
 ifneq ($(OS),Windows_NT)
-	rm $(xdg_config_home)/spotify-player
-	rm $(xdg_config_home)/i3
-	rm $(xdg_config_home)/i3status
-	rm $(xdg_config_home)/picom
+	rm $(xdg_config_home)/sway
 endif
 
 .PHONY: all link make-dirs clean
