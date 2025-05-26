@@ -30,6 +30,7 @@ link: make-dirs
 	ln -sf $(realpath nvim) $(neovim_config_dir)
 ifneq ($(OS),Windows_NT)
 	ln -sf $(realpath sway) $(xdg_config_home)
+	ln -sf $(realpath tofi) $(xdg_config_home)
 endif
 
 clean:
@@ -37,6 +38,7 @@ clean:
 	rm $(neovim_config_dir)/nvim
 ifneq ($(OS),Windows_NT)
 	rm $(xdg_config_home)/sway
+	rm $(xdg_config_home)/tofi
 endif
 
 .PHONY: all link make-dirs clean
