@@ -32,56 +32,56 @@ return {
         topdelete = { text = '‾' },
         changedelete = { text = '~' },
       },
-      --   on_attach = function(bufnr)
-      --     local gitsigns = require 'gitsigns'
-      --
-      --     local function map(mode, l, r, opts)
-      --       opts = opts or {}
-      --       opts.buffer = bufnr
-      --       vim.keymap.set(mode, l, r, opts)
-      --     end
-      --
-      --     -- Navigation
-      --     map('n', ']c', function()
-      --       if vim.wo.diff then
-      --         vim.cmd.normal { ']c', bang = true }
-      --       else
-      --         gitsigns.nav_hunk 'next'
-      --       end
-      --     end, { desc = 'Jump to next git [c]hange' })
-      --
-      --     map('n', '[c', function()
-      --       if vim.wo.diff then
-      --         vim.cmd.normal { '[c', bang = true }
-      --       else
-      --         gitsigns.nav_hunk 'prev'
-      --       end
-      --     end, { desc = 'Jump to previous git [c]hange' })
-      --
-      --     -- Actions
-      --     -- visual mode
-      --     map('v', '<leader>hs', function()
-      --       gitsigns.stage_hunk { vim.fn.line '.', vim.fn.line 'v' }
-      --     end, { desc = 'git [s]tage hunk' })
-      --     map('v', '<leader>hr', function()
-      --       gitsigns.reset_hunk { vim.fn.line '.', vim.fn.line 'v' }
-      --     end, { desc = 'git [r]eset hunk' })
-      --     -- normal mode
-      --     map('n', '<leader>hs', gitsigns.stage_hunk, { desc = 'git [s]tage hunk' })
-      --     map('n', '<leader>hr', gitsigns.reset_hunk, { desc = 'git [r]eset hunk' })
-      --     map('n', '<leader>hS', gitsigns.stage_buffer, { desc = 'git [S]tage buffer' })
-      --     map('n', '<leader>hu', gitsigns.stage_hunk, { desc = 'git [u]ndo stage hunk' })
-      --     map('n', '<leader>hR', gitsigns.reset_buffer, { desc = 'git [R]eset buffer' })
-      --     map('n', '<leader>hp', gitsigns.preview_hunk, { desc = 'git [p]review hunk' })
-      --     map('n', '<leader>hb', gitsigns.blame_line, { desc = 'git [b]lame line' })
-      --     map('n', '<leader>hd', gitsigns.diffthis, { desc = 'git [d]iff against index' })
-      --     map('n', '<leader>hD', function()
-      --       gitsigns.diffthis '@'
-      --     end, { desc = 'git [D]iff against last commit' })
-      --     -- Toggles
-      --     map('n', '<leader>tb', gitsigns.toggle_current_line_blame, { desc = '[T]oggle git show [b]lame line' })
-      --     map('n', '<leader>tD', gitsigns.preview_hunk_inline, { desc = '[T]oggle git show [D]eleted' })
-      --   end,
+      on_attach = function(bufnr)
+        local gitsigns = require 'gitsigns'
+
+        local function map(mode, l, r, opts)
+          opts = opts or {}
+          opts.buffer = bufnr
+          vim.keymap.set(mode, l, r, opts)
+        end
+
+        -- Navigation
+        map('n', ']c', function()
+          if vim.wo.diff then
+            vim.cmd.normal { ']c', bang = true }
+          else
+            gitsigns.nav_hunk 'next'
+          end
+        end, { desc = 'Jump to next git [c]hange' })
+
+        map('n', '[c', function()
+          if vim.wo.diff then
+            vim.cmd.normal { '[c', bang = true }
+          else
+            gitsigns.nav_hunk 'prev'
+          end
+        end, { desc = 'Jump to previous git [c]hange' })
+
+        -- Actions
+        -- visual mode
+        map('v', '<leader>hs', function()
+          gitsigns.stage_hunk { vim.fn.line '.', vim.fn.line 'v' }
+        end, { desc = 'git [s]tage hunk' })
+        map('v', '<leader>hr', function()
+          gitsigns.reset_hunk { vim.fn.line '.', vim.fn.line 'v' }
+        end, { desc = 'git [r]eset hunk' })
+        -- normal mode
+        map('n', '<leader>hs', gitsigns.stage_hunk, { desc = 'git [s]tage hunk' })
+        map('n', '<leader>hr', gitsigns.reset_hunk, { desc = 'git [r]eset hunk' })
+        map('n', '<leader>hS', gitsigns.stage_buffer, { desc = 'git [S]tage buffer' })
+        map('n', '<leader>hu', gitsigns.stage_hunk, { desc = 'git [u]ndo stage hunk' })
+        map('n', '<leader>hR', gitsigns.reset_buffer, { desc = 'git [R]eset buffer' })
+        map('n', '<leader>hp', gitsigns.preview_hunk, { desc = 'git [p]review hunk' })
+        map('n', '<leader>hb', gitsigns.blame_line, { desc = 'git [b]lame line' })
+        map('n', '<leader>hd', gitsigns.diffthis, { desc = 'git [d]iff against index' })
+        map('n', '<leader>hD', function()
+          gitsigns.diffthis '@'
+        end, { desc = 'git [D]iff against last commit' })
+        -- Toggles
+        map('n', '<leader>tb', gitsigns.toggle_current_line_blame, { desc = '[T]oggle git show [b]lame line' })
+        map('n', '<leader>tD', gitsigns.preview_hunk_inline, { desc = '[T]oggle git show [D]eleted' })
+      end,
     },
   },
 
@@ -523,65 +523,6 @@ return {
     end,
   },
 
-  -- linters
-  {
-    'mfussenegger/nvim-lint',
-    event = { 'BufReadPre', 'BufNewFile' },
-    config = function()
-      local lint = require 'lint'
-      lint.linters_by_ft = {
-        markdown = { 'markdownlint' },
-      }
-
-      -- To allow other plugins to add linters to require('lint').linters_by_ft,
-      -- instead set linters_by_ft like this:
-      -- lint.linters_by_ft = lint.linters_by_ft or {}
-      -- lint.linters_by_ft['markdown'] = { 'markdownlint' }
-      --
-      -- However, note that this will enable a set of default linters,
-      -- which will cause errors unless these tools are available:
-      -- {
-      --   clojure = { "clj-kondo" },
-      --   dockerfile = { "hadolint" },
-      --   inko = { "inko" },
-      --   janet = { "janet" },
-      --   json = { "jsonlint" },
-      --   markdown = { "vale" },
-      --   rst = { "vale" },
-      --   ruby = { "ruby" },
-      --   terraform = { "tflint" },
-      --   text = { "vale" }
-      -- }
-      --
-      -- You can disable the default linters by setting their filetypes to nil:
-      -- lint.linters_by_ft['clojure'] = nil
-      -- lint.linters_by_ft['dockerfile'] = nil
-      -- lint.linters_by_ft['inko'] = nil
-      -- lint.linters_by_ft['janet'] = nil
-      -- lint.linters_by_ft['json'] = nil
-      -- lint.linters_by_ft['markdown'] = nil
-      -- lint.linters_by_ft['rst'] = nil
-      -- lint.linters_by_ft['ruby'] = nil
-      -- lint.linters_by_ft['terraform'] = nil
-      -- lint.linters_by_ft['text'] = nil
-
-      -- Create autocommand which carries out the actual linting
-      -- on the specified events.
-      local lint_augroup = vim.api.nvim_create_augroup('lint', { clear = true })
-      vim.api.nvim_create_autocmd({ 'BufEnter', 'BufWritePost', 'InsertLeave' }, {
-        group = lint_augroup,
-        callback = function()
-          -- Only run the linter in buffers that you can modify in order to
-          -- avoid superfluous noise, notably within the handy LSP pop-ups that
-          -- describe the hovered symbol using Markdown.
-          if vim.opt_local.modifiable:get() then
-            lint.try_lint()
-          end
-        end,
-      })
-    end,
-  },
-
   -- formatting
   {
     'stevearc/conform.nvim',
@@ -599,32 +540,10 @@ return {
     },
     opts = {
       notify_on_error = false,
-      format_on_save = function(bufnr)
-        -- Disable "format_on_save lsp_fallback" for languages that don't
-        -- have a well standardized coding style. You can add additional
-        -- languages here or re-enable it for the disabled ones.
-        local disable_filetypes = {
-          -- c = true,
-          -- cpp = true
-        }
-        if disable_filetypes[vim.bo[bufnr].filetype] then
-          return nil
-        else
-          return {
-            timeout_ms = 500,
-            lsp_format = 'fallback',
-          }
-        end
-      end,
       formatters_by_ft = {
         lua = { 'stylua' },
         cpp = { 'clang-format' },
         c = { 'clang-format' },
-        -- Conform can also run multiple formatters sequentially
-        -- python = { "isort", "black" },
-        --
-        -- You can use 'stop_after_first' to run the first available formatter from the list
-        -- javascript = { "prettierd", "prettier", stop_after_first = true },
       },
     },
   },
@@ -679,12 +598,6 @@ return {
           --  This will auto-import if your LSP supports it.
           --  This will expand snippets if the LSP sent a snippet.
           ['<C-y>'] = cmp.mapping.confirm { select = true },
-
-          -- If you prefer more traditional completion keymaps,
-          -- you can uncomment the following lines
-          --['<CR>'] = cmp.mapping.confirm { select = true },
-          --['<Tab>'] = cmp.mapping.select_next_item(),
-          --['<S-Tab>'] = cmp.mapping.select_prev_item(),
 
           -- Manually trigger a completion from nvim-cmp.
           --  Generally you don't need this, because nvim-cmp will display
@@ -1013,9 +926,6 @@ return {
       return 'make install_jsregexp'
     end)(),
     dependencies = {
-      -- `friendly-snippets` contains a variety of premade snippets.
-      --    See the README about individual language/framework/plugin snippets:
-      --    https://github.com/rafamadriz/friendly-snippets
       -- {
       --   'rafamadriz/friendly-snippets',
       --   config = function()
@@ -1023,47 +933,11 @@ return {
       --   end,
       -- },
     },
-    -- config = function()
-    -- i think C-y already does this, not sure where it's bound
-    -- vim.keymap.set({ 'i' }, '<Tab>', function()
-    --   ls.expand()
-    -- end, { silent = true })
-
-    -- C-j does this
-    -- vim.keymap.set({ 'i', 's' }, '<C-H>', function()
-    --   ls.jump(1)
-    -- end, { silent = true })
-
-    -- C-k does this
-    -- vim.keymap.set({ 'i', 's' }, '<C-J>', function()
-    --   ls.jump(-1)
-    -- end, { silent = true })
-    --
-    -- -- wtf is a choice node :100:
-    -- vim.keymap.set({ 'i', 's' }, '<C-E>', function()
-    --   if ls.choice_active() then
-    --     ls.change_choice(1)
-    --   end
-    -- end, { silent = true })
-    -- end,
     keys = {
-      {
-        'C-h',
-        function()
-          ls.jump(1)
-        end,
-        mode = { 'i', 's' },
-      },
-      {
-        'C-j',
-        function()
-          ls.jump(-1)
-        end,
-        mode = { 'i', 's' },
-      },
       {
         'C-e',
         function()
+          local ls = require('ls')
           if ls.choice_active() then
             ls.change_choice(1)
           end
@@ -1086,12 +960,15 @@ return {
       use_default_keymaps = true,
     },
     keys = {
-      { '\\', '<cmd>Oil .<cr>', desc = 'open oil in cwd' },
+      {
+        '\\',
+        function()
+          require('oil').toggle_float()
+        end,
+        desc = 'open oil in cwd',
+      },
     },
-    -- Optional dependencies
-    -- dependencies = { { 'echasnovski/mini.icons', opts = {} } },
-    dependencies = { 'nvim-tree/nvim-web-devicons' }, -- use if you prefer nvim-web-devicons
-    -- Lazy loading is not recommended because it is very tricky to make it work correctly in all situations.
+    dependencies = { 'nvim-tree/nvim-web-devicons' },
     lazy = false,
   },
 

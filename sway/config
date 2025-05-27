@@ -9,6 +9,7 @@ set $menu tofi-run | xargs swaymsg exec --
 
 input type:pointer accel_profile "flat"
 input type:keyboard xkb_numlock on
+input type:keyboard repeat_delay 150
 
 output DP-1 resolution 1920x1080@240Hz
 output DP-2 resolution 1920x1080@144Hz

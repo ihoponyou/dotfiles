@@ -38,13 +38,13 @@ local function create_floating_window(opts)
 end
 
 local toggle_terminal = function()
-  if not vim.api.nvim_win_is_valid(state.floating.win) then
-    state.floating = create_floating_window { buf = state.floating.buf }
-    if vim.bo[state.floating.buf].buftype ~= 'terminal' then
+  if not vim.api.nvim_win_is_valid(state.win) then
+    state = create_floating_window { buf = state.buf }
+    if vim.bo[state.buf].buftype ~= 'terminal' then
       vim.cmd.terminal()
     end
   else
-    vim.api.nvim_win_hide(state.floating.win)
+    vim.api.nvim_win_hide(state.win)
   end
 end
 
