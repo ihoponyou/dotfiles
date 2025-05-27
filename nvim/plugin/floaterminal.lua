@@ -1,8 +1,6 @@
 local state = {
-  floating = {
-    buf = -1,
-    win = -1,
-  },
+  buf = -1,
+  win = -1,
 }
 
 local function create_floating_window(opts)
@@ -53,5 +51,3 @@ end
 -- Example usage:
 -- Create a floating window with default dimensions
 vim.api.nvim_create_user_command('Floaterminal', toggle_terminal, {})
-
-vim.keymap.set({ 'n', 't' }, ' tt', toggle_terminal, { desc = 'toggle floaterminal' })

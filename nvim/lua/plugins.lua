@@ -740,9 +740,6 @@ return {
   {
     'echasnovski/mini.nvim',
     config = function()
-      -- set colorscheme
-      vim.cmd.colorscheme 'minicyan'
-
       -- Better Around/Inside textobjects
       --
       -- Examples:
@@ -763,7 +760,7 @@ return {
       --  and try some other statusline plugin
       local statusline = require 'mini.statusline'
       -- set use_icons to true if you have a Nerd Font
-      statusline.setup { use_icons = vim.g.have_nerd_font }
+      statusline.setup { use_icons = vim.g.have_nerd_font, content = {} }
 
       -- You can configure sections in the statusline by overriding their
       -- default behavior. For example, here we set the section for
@@ -772,9 +769,6 @@ return {
       statusline.section_location = function()
         return '%2l:%-2v'
       end
-
-      -- ... and there is more!
-      --  Check out: https://github.com/echasnovski/mini.nvim
     end,
   },
 

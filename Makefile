@@ -16,7 +16,7 @@ ifeq ($(OS),Windows_NT)
 alacritty_config_dir := $$APPDATA/alacritty
 neovim_config_dir := $$LOCALAPPDATA
 else
-alacritty_config_dir := $(xdg_config_home)/alacritty
+alacritty_config_dir := $(xdg_config_home)
 neovim_config_dir := $(xdg_config_home)
 endif
 
@@ -26,7 +26,7 @@ make-dirs:
 	mkdir -p $(xdg_config_home_default)
 
 link: make-dirs
-	ln -sf $(realpath .)/alacritty.toml $(alacritty_config_dir)
+	ln -sf $(realpath alacritty) $(alacritty_config_dir)
 	ln -sf $(realpath nvim) $(neovim_config_dir)
 ifneq ($(OS),Windows_NT)
 	ln -sf $(realpath sway) $(xdg_config_home)
@@ -34,7 +34,7 @@ ifneq ($(OS),Windows_NT)
 endif
 
 clean:
-	rm $(alacritty_config_dir)/alacritty.toml
+	rm $(alacritty_config_dir)/alacritty
 	rm $(neovim_config_dir)/nvim
 ifneq ($(OS),Windows_NT)
 	rm $(xdg_config_home)/sway
