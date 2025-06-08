@@ -154,6 +154,7 @@ vim.keymap.set('n', 'k', 'gk')
 
 vim.opt.tabstop = 4
 vim.opt.shiftwidth = 4
+-- vim.opt.guicursor = 'i-ci:blinkwait50-blinkoff50-blinkon50'
 
 if vim.fn.has 'win32' == 1 then
   vim.o.shell = 'C://w64devkit//bin//bash.exe'
