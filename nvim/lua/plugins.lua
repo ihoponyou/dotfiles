@@ -543,6 +543,17 @@ return {
     },
     opts = {
       notify_on_error = false,
+      format_on_save = function(bufnr)
+        local disabled_filetypes = {}
+        if disabled_filetypes[vim.bo[bufnr].filetype] then
+          return nil
+        else
+          return {
+            timeout_ms = 500,
+            lsp_format = 'fallback',
+          }
+        end
+      end,
       formatters_by_ft = {
         lua = { 'stylua' },
         cpp = { 'clang-format' },
@@ -745,6 +756,7 @@ return {
 
       -- Add your own debuggers here
       'leoluz/nvim-dap-go',
+      'mfussenegger/nvim-dap-python',
     },
     keys = {
       -- Basic debugging keymaps, feel free to change to your liking!
@@ -817,6 +829,44 @@ return {
         ensure_installed = {
           -- Update this to ensure that you have the debuggers for the langs you want
           'delve',
+          'cppdbg',
+          'debugpy',
+        },
+      }
+
+      dap.configurations = {
+        c = {
+          {
+            name = 'Launch file',
+            type = 'cppdbg',
+            request = 'launch',
+            program = function()
+              return vim.fn.input('Path to executable: ', vim.fn.getcwd() .. '/', 'file')
+            end,
+            cwd = '${workspaceFolder}',
+            stopAtEntry = false,
+            MIMode = 'lldb',
+          },
+          {
+            name = 'Attach to lldbserver :1234',
+            type = 'cppdbg',
+            request = 'launch',
+            MIMode = 'lldb',
+            miDebuggerServerAddress = 'localhost:1234',
+            miDebuggerPath = '/usr/bin/lldb',
+            cwd = '${workspaceFolder}',
+            program = function()
+              return vim.fn.input('Path to executable: ', vim.fn.getcwd() .. '/', 'file')
+            end,
+          },
+        },
+        python = {
+          {
+            type = 'python',
+            request = 'launch',
+            name = 'Launch file',
+            program = '${file}',
+          },
         },
       }
 
@@ -866,6 +916,7 @@ return {
           detached = vim.fn.has 'win32' == 0,
         },
       }
+      require('dap-python').setup()
     end,
   },
 
