@@ -277,7 +277,10 @@ return {
       -- Automatically install LSPs and related tools to stdpath for Neovim
       -- Mason must be loaded before its dependents so we need to set it up here.
       -- NOTE: `opts = {}` is the same as calling `require('mason').setup({})`
-      { 'williamboman/mason.nvim', opts = {} },
+      {
+        'williamboman/mason.nvim',
+        opts = {},
+      },
       'williamboman/mason-lspconfig.nvim',
       'WhoIsSethDaniel/mason-tool-installer.nvim',
 
@@ -553,10 +556,7 @@ return {
     'hrsh7th/nvim-cmp',
     event = 'InsertEnter',
     dependencies = {
-      -- Snippet Engine & its associated nvim-cmp source
-      {
-        'L3MON4D3/LuaSnip',
-      },
+      'L3MON4D3/LuaSnip',
       'saadparwaiz1/cmp_luasnip',
 
       -- Adds other completion capabilities.
@@ -937,7 +937,7 @@ return {
       {
         'C-e',
         function()
-          local ls = require('ls')
+          local ls = require 'ls'
           if ls.choice_active() then
             ls.change_choice(1)
           end
@@ -972,7 +972,7 @@ return {
     lazy = false,
   },
 
-  -- git stuff
+  -- git tui
   {
     'NeogitOrg/neogit',
     dependencies = {
@@ -985,5 +985,36 @@ return {
       { '<leader>gc', '<cmd>Neogit commit<cr>', desc = 'open Neo[g]it [c]ommit popup' },
     },
     lazy = false,
+  },
+
+  {
+    'folke/zen-mode.nvim',
+    keys = {
+      { '<leader>z', '<cmd>ZenMode<cr>', desc = 'toggle zen mode' },
+    },
+  },
+
+  {
+    'linux-cultist/venv-selector.nvim',
+    branch = 'regexp',
+    dependencies = {
+      'neovim/nvim-lspconfig',
+      'nvim-telescope/telescope.nvim',
+      'mfussenegger/nvim-dap-python',
+    },
+    opts = {
+      options = {
+        fd_binary_name = 'C:\\Users\\noahm\\AppData\\Local\\Microsoft\\WinGet\\Packages\\sharkdp.fd_Microsoft.Winget.Source_8wekyb3d8bbwe\\fd-v10.2.0-x86_64-pc-windows-msvc\\fd.exe',
+
+      },
+      name = { 'venv', '.venv' },
+      auto_refresh = true,
+    },
+    keys = {
+      -- Keymap to open VenvSelector to pick a venv.
+      { '<leader>pvs', '<cmd>VenvSelect<cr>' },
+      -- Keymap to retrieve the venv from a cache (the one previously used for the same project directory).
+      { '<leader>pvc', '<cmd>VenvSelectCached<cr>' },
+    },
   },
 }

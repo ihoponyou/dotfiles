@@ -13,7 +13,7 @@ endif
 # assuming shell properly accesses $APPDATA/$LOCALAPPDATA
 # works with bash
 ifeq ($(OS),Windows_NT)
-alacritty_config_dir := $$APPDATA/alacritty
+alacritty_config_dir := $$APPDATA
 neovim_config_dir := $$LOCALAPPDATA
 else
 alacritty_config_dir := $(xdg_config_home)
