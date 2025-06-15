@@ -916,7 +916,7 @@ return {
           detached = vim.fn.has 'win32' == 0,
         },
       }
-      require('dap-python').setup()
+      require('dap-python').setup 'python'
     end,
   },
 
@@ -1054,18 +1054,34 @@ return {
       'mfussenegger/nvim-dap-python',
     },
     opts = {
-      options = {
-        fd_binary_name = 'C:\\Users\\noahm\\AppData\\Local\\Microsoft\\WinGet\\Packages\\sharkdp.fd_Microsoft.Winget.Source_8wekyb3d8bbwe\\fd-v10.2.0-x86_64-pc-windows-msvc\\fd.exe',
-
-      },
+      -- options = {
+      --   fd_binary_name = 'C:\\Users\\noahm\\AppData\\Local\\Microsoft\\WinGet\\Packages\\sharkdp.fd_Microsoft.Winget.Source_8wekyb3d8bbwe\\fd-v10.2.0-x86_64-pc-windows-msvc\\fd.exe',
+      -- },
       name = { 'venv', '.venv' },
       auto_refresh = true,
     },
     keys = {
-      -- Keymap to open VenvSelector to pick a venv.
       { '<leader>pvs', '<cmd>VenvSelect<cr>' },
-      -- Keymap to retrieve the venv from a cache (the one previously used for the same project directory).
-      { '<leader>pvc', '<cmd>VenvSelectCached<cr>' },
     },
+  },
+
+  {
+    'nvim-neotest/neotest',
+    dependencies = {
+      'nvim-neotest/nvim-nio',
+      'nvim-lua/plenary.nvim',
+      'antoinemadec/FixCursorHold.nvim',
+      'nvim-treesitter/nvim-treesitter',
+      'nvim-neotest/neotest-python',
+    },
+    config = function()
+      require('neotest').setup {
+        adapters = {
+          require 'neotest-python' {
+            dap = { justMyCode = true },
+          },
+        },
+      }
+    end,
   },
 }
