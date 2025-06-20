@@ -184,9 +184,9 @@ vim.keymap.set('n', '<leader>Tdn', function()
   require('neotest').run.run { suite = false, strategy = 'dap' }
 end, { desc = 'Neo[t]est: [d]ebug [n]earest test' })
 
-vim.keymap.set('n', '<leader>Trf', function()
+vim.keymap.set('n', '<leader>Trr', function()
   require('neotest').run.run(vim.fn.expand '%')
-end, { desc = 'Neo[T]est: [r]un current [f]ile' })
+end, { desc = 'Neo[T]est: [r]un current file' })
 
 vim.keymap.set('n', '<leader>To', require('neotest').output_panel.toggle, { desc = 'Neo[T]est: toggle [o]utput panel' })
 vim.keymap.set('n', '<leader>Ts', require('neotest').summary.toggle, { desc = 'Neo[T]est: toggle [s]ummary window' })
