@@ -1054,9 +1054,11 @@ return {
       'mfussenegger/nvim-dap-python',
     },
     opts = {
-      -- options = {
-      --   fd_binary_name = 'C:\\Users\\noahm\\AppData\\Local\\Microsoft\\WinGet\\Packages\\sharkdp.fd_Microsoft.Winget.Source_8wekyb3d8bbwe\\fd-v10.2.0-x86_64-pc-windows-msvc\\fd.exe',
-      -- },
+      options = {
+        fd_binary_name = vim.fn.has 'win32' == 1
+            and vim.fn.expand '~/Microsoft/WinGet/Packages/sharkdp.fd_Microsoft.Winget.Source_8wekyb3d8bbwe/fd-v10.2.0-x86_64-pc-windows-msvc/fd.exe'
+          or nil,
+      },
       name = { 'venv', '.venv' },
       auto_refresh = true,
     },

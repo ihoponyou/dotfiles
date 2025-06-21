@@ -1,5 +1,5 @@
 
-set $mod Mod4
+set $mod Mod1
 set $left h
 set $down j
 set $up k
@@ -9,7 +9,7 @@ set $menu tofi-run | xargs swaymsg exec --
 
 input type:pointer accel_profile "flat"
 input type:keyboard xkb_numlock on
-input type:keyboard repeat_delay 150
+# input type:keyboard repeat_delay 200
 
 output DP-1 resolution 1920x1080@240Hz
 output DP-2 resolution 1920x1080@144Hz
@@ -97,6 +97,8 @@ bindsym $mod+Shift+minus move scratchpad
 # If there are multiple scratchpad windows, this command cycles through them.
 bindsym $mod+minus scratchpad show
 
+bindsym Mod4+v exec obs-cmd replay save
+
 #
 # Resizing containers:
 #
@@ -127,7 +129,7 @@ bindsym --locked XF86AudioMicMute exec pactl set-source-mute \@DEFAULT_SOURCE@ t
 bindsym --locked XF86MonBrightnessDown exec brightnessctl set 5%-
 bindsym --locked XF86MonBrightnessUp exec brightnessctl set 5%+
 # Special key to take a screenshot with grim
-bindsym Print exec grim
+bindsym Mod4+1 exec slurp | grim -g - - | tee ~/Pictures/screenshots/$(date +%F_%H-%M-%S).png | wl-copy
 
 # Drag floating windows by holding down $mod and left mouse button.
 # Resize them with right mouse button + $mod.
@@ -149,7 +151,7 @@ bar {
 
     # When the status_command prints a new line to stdout, swaybar updates.
     # The default just shows the current date and time.
-    status_command while date +'%Y-%m-%d %X'; do sleep 1; done
+    status_command while date +'%Y %m %d @ %X'; do sleep 1; done
 
     colors {
         statusline $yellow
@@ -167,6 +169,11 @@ gaps inner 4
 default_border pixel 1
 default_floating_border pixel 1
 
+# we only care about the background (middle) value since we are using pixel borders
+client.focused #000000 $yellow #000000 $blue
+# these are the defaults for client.unfocused
+client.focused_inactive #333333 #222222 #888888 #292d2e #222222
+
 blur enable
 blur_xray disable
 blur_passes 2
@@ -174,16 +181,14 @@ blur_radius 3
 blur_brightness 0.7
 
 for_window [tiling] opacity 0.9
-
 for_window [app_id=librewolf] opacity 1; blur disable;
+for_window [app_id=gimp] opacity 1; blur disable;
 
-# we only care about the background (middle) value since we are using pixel borders
-client.focused #000000 $yellow #000000 $blue
-# these are the defaults for client.unfocused
-client.focused_inactive #333333 #222222 #888888 #292d2e #222222
+# allow systemd units to target the sway session
+exec "systemctl --user import-environment {,WAYLAND_}DISPLAY SWAYSOCK; systemctl --user start sway-session.target"
+exec swaymsg -t subscribe '["shutdown"]' && systemctl --user stop sway-session.target
 
-exec /home/noah/.local/bin/swww-daemon
-exec /home/noah/.local/bin/swww img ~/Pictures/thinker.png
+exec_always ~/scripts/start-swww.sh
 
 include /etc/sway/config.d/*
 
