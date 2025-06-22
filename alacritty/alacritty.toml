@@ -11,5 +11,10 @@ import = [
 	"~/dotfiles/alacritty/themes/gruvbox_dark.toml"
 ]
 
+[keyboard]
+bindings = [
+   { key = "Return", mods = "Alt|Shift", action = "SpawnNewInstance" }
+]
+
 [terminal]
 shell = "bash"
