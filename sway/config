@@ -182,6 +182,7 @@ blur_brightness 0.7
 
 for_window [tiling] opacity 0.9
 for_window [app_id=librewolf] opacity 1; blur disable;
+assign [app_id=librewolf] workspace 3
 for_window [app_id=gimp] opacity 1; blur disable;
 
 # allow systemd units to target the sway session
