@@ -1,5 +1,6 @@
 
-set $mod Mod1
+set $mod Mod4
+set $mod_alt Mod1
 set $left h
 set $down j
 set $up k
@@ -11,8 +12,12 @@ input type:pointer accel_profile "flat"
 input type:keyboard xkb_numlock on
 # input type:keyboard repeat_delay 200
 
-output DP-1 resolution 1920x1080@240Hz
-output DP-2 resolution 1920x1080@144Hz
+input type:touchpad {
+    dwt enabled
+    tap enabled
+    middle_emulation enabled
+    natural_scroll enabled
+}
 
 ### Idle configuration
 #
@@ -97,7 +102,6 @@ bindsym $mod+Shift+minus move scratchpad
 # If there are multiple scratchpad windows, this command cycles through them.
 bindsym $mod+minus scratchpad show
 
-
 #
 # Resizing containers:
 #
@@ -128,9 +132,7 @@ bindsym --locked XF86AudioMicMute exec pactl set-source-mute \@DEFAULT_SOURCE@ t
 bindsym --locked XF86MonBrightnessDown exec brightnessctl set 5%-
 bindsym --locked XF86MonBrightnessUp exec brightnessctl set 5%+
 # Special key to take a screenshot with grim
-bindsym Mod4+1 exec slurp | grim -g - - | tee ~/Pictures/screenshots/$(date +%F_%H-%M-%S).png | wl-copy
-# obs replay buffer hotkey
-bindsym Mod4+2 exec obs-cmd replay save
+bindsym $mod_alt+Shift+1 exec slurp | grim -g - - | tee ~/Pictures/screenshots/$(date +%F_%H-%M-%S).png | wl-copy
 
 # Drag floating windows by holding down $mod and left mouse button.
 # Resize them with right mouse button + $mod.
@@ -162,7 +164,7 @@ bar {
         inactive_workspace #323232 #323232 #5c5c5c
     }
 
-    font "Monaspace Neon" 8
+    font "Monaspace Neon" 11
 }
 
 gaps inner 4

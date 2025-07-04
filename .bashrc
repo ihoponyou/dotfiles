@@ -19,9 +19,11 @@ _MAGENTA=$(tput setaf 5)
 _BOLD=$(tput bold)
 _RESET=$(tput sgr0)
 PS1='['
-PS1+='${_BOLD}${_YELLOW}\u${_GREEN}@${_BOLD}${_YELLOW}\h '
-PS1+='${_BLUE}\@ '
-PS1+='${_BOLD}${_MAGENTA}\w${_RESET}${_MAGENTA}$(__git_ps1)${_RESET}'
+PS1+='${_BOLD}${_YELLOW}\u${_RESET}'
+PS1+='${_GREEN}@'
+PS1+='${_BOLD}${_YELLOW}\h '
+# PS1+='${_BLUE}\@ '
+PS1+='${_BOLD}${_BLUE}\w${_RESET}${_MAGENTA}$(__git_ps1)${_RESET}'
 PS1+=']'
 PS1+='\n\$ '
 
