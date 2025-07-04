@@ -190,7 +190,7 @@ for_window [app_id=gimp] opacity 1; blur disable;
 exec "systemctl --user import-environment {,WAYLAND_}DISPLAY SWAYSOCK; systemctl --user start sway-session.target"
 exec swaymsg -t subscribe '["shutdown"]' && systemctl --user stop sway-session.target
 
-exec_always ~/scripts/start-swww.sh
+exec_always ~/dotfiles/wallpaper/start-swww.sh
 
 include /etc/sway/config.d/*
 
