@@ -31,6 +31,7 @@ link: make-dirs
 ifneq ($(OS),Windows_NT)
 	ln -sf $(realpath sway) $(xdg_config_home)
 	ln -sf $(realpath tofi) $(xdg_config_home)
+	ln -sf $(realpath waybar) $(xdg_config_home)
 	ln -sf $(realpath .bashrc) $$HOME
 endif
 
@@ -40,6 +41,7 @@ clean:
 ifneq ($(OS),Windows_NT)
 	rm $(xdg_config_home)/sway
 	rm $(xdg_config_home)/tofi
+	rm $(xdg_config_home)/waybar
 	rm $$HOME/.bashrc
 endif
 

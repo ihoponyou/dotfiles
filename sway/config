@@ -20,18 +20,18 @@ input type:touchpad {
     tap enabled
     middle_emulation enabled
     natural_scroll enabled
-    accel_profile "flat"
-    pointer_accel 0.7
+    # accel_profile "flat"
+    # pointer_accel 0.7
 }
 
 ### Idle configuration
 #
 # Example configuration:
 #
-# exec swayidle -w \
-#          timeout 300 'swaylock -f -c 000000' \
-#          timeout 600 'swaymsg "output * power off"' resume 'swaymsg "output * power on"' \
-#          before-sleep 'swaylock -f -c 000000'
+exec swayidle -w \
+         timeout 300 'swaylock -f -c 000000' \
+         timeout 600 'swaymsg "output * power off"' resume 'swaymsg "output * power on"' \
+         before-sleep 'swaylock -f -c 000000'
 #
 # This will lock your screen after 300 seconds of inactivity, then turn off
 # your displays after another 300 seconds, and turn your screens back on when
@@ -154,22 +154,19 @@ set $green #8ec07c
 set $blue #458588
 
 bar {
-    position bottom
-    gaps 4
-
-    # When the status_command prints a new line to stdout, swaybar updates.
-    # The default just shows the current date and time.
-    status_command while date +'%Y %m %d @ %X'; do sleep 1; done
-
-    colors {
-        statusline $yellow
-        background #00000000
-        focused_workspace $yellow $brown $yellow
-        active_workspace #323232 #323232 #5c5c5c
-        inactive_workspace #323232 #323232 #5c5c5c
-    }
-
-    font "Monaspace Neon" 11
+    swaybar_command waybar
+    # status_command while date +'%Y %m %d @ %X'; do sleep 1; done
+    #
+    # position bottom
+    # gaps 4
+    # font "Monaspace Neon" 11
+    # colors {
+    #     statusline $yellow
+    #     background #00000000
+    #     focused_workspace $yellow $brown $yellow
+    #     active_workspace #323232 #323232 #5c5c5c
+    #     inactive_workspace #323232 #323232 #5c5c5c
+    # }
 }
 
 gaps inner 4
@@ -193,11 +190,11 @@ for_window [app_id=librewolf] opacity 1; blur disable;
 assign [app_id=librewolf] workspace 3
 for_window [app_id=gimp] opacity 1; blur disable;
 
-# allow systemd units to target the sway session
-exec "systemctl --user import-environment {,WAYLAND_}DISPLAY SWAYSOCK; systemctl --user start sway-session.target"
-exec swaymsg -t subscribe '["shutdown"]' && systemctl --user stop sway-session.target
-
 exec_always ~/dotfiles/wallpaper/start-swww.sh
 
 include /etc/sway/config.d/*
+
+# allow systemd units to target the sway session
+exec "systemctl --user import-environment {,WAYLAND_}DISPLAY SWAYSOCK; systemctl --user start sway-session.target"
+exec swaymsg -t subscribe '["shutdown"]' && systemctl --user stop sway-session.target
 

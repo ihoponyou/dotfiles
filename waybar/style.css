@@ -1,0 +1,100 @@
+@define-color black #282828;
+@define-color white #a89984;
+@define-color red #cc241d;
+@define-color green #98971a;
+@define-color yellow #d79921;
+@define-color blue #458588;
+@define-color brown #3c3836;
+
+* {
+    border: none;
+    border-radius: 0;
+    min-height: 0;
+    padding: 0;
+    font-family: "monaspace neon";
+    font-weight: 500;
+    font-size: 11px;
+}
+
+window#waybar {
+    background-color: rgba(0, 0, 0, 0);
+}
+
+tooltip {
+    background-color: @brown;
+    border: 1px solid @yellow;
+}
+
+#clock,
+#tray,
+#cpu,
+#memory,
+#battery,
+#network,
+#pulseaudio {
+    padding: 2px 4px;
+}
+
+#workspaces button {
+    all: initial;
+    min-width: 0;
+    padding: 4px 6px;
+    background-color: @black;
+    color: @white;
+    margin: 0px 4px 0px 0px;
+}
+
+#workspaces button.focused {
+    border: 1px solid @yellow;
+    color: @yellow;
+}
+
+#workspaces button.urgent {
+    background-color: @red;
+}
+
+#clock {
+    background-color: @black;
+    color: @white;
+}
+
+#cpu,
+#memory,
+#network,
+#pulseaudio,
+#tray,
+#battery {
+    background-color: @black;
+    color: #a89984;
+    margin: 0px 0px 0px 4px;
+}
+
+#battery {
+    background-color: @green;
+    color: #000;
+}
+
+#cpu.warning,
+#memory.warning {
+    border: 2px solid @yellow;
+    color: @yellow;
+}
+
+#cpu.critical,
+#memory.critical {
+    border: 2px solid @red;
+    color: @red;
+}
+
+#battery.warning {
+    background-color: @yellow;
+}
+#battery.critical,
+#battery.urgent {
+    background-color: @red;
+}
+
+#pulseaudio.muted {
+    border: 1px solid @red;
+    color: @red;
+}
