@@ -33,6 +33,7 @@ ifneq ($(OS),Windows_NT)
 	ln -sf $(realpath tofi) $(xdg_config_home)
 	ln -sf $(realpath waybar) $(xdg_config_home)
 	ln -sf $(realpath .bashrc) $$HOME
+	ln -sf $(realpath .tmux.conf) $$HOME
 endif
 
 clean:
@@ -43,6 +44,7 @@ ifneq ($(OS),Windows_NT)
 	rm $(xdg_config_home)/tofi
 	rm $(xdg_config_home)/waybar
 	rm $$HOME/.bashrc
+	rm $$HOME/.tmux.conf
 endif
 
 .PHONY: all link make-dirs clean
