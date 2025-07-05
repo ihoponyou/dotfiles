@@ -12,8 +12,8 @@
     min-height: 0;
     padding: 0;
     font-family: "monaspace neon";
-    font-weight: 500;
-    font-size: 11px;
+    font-weight: 600;
+    font-size: 12px;
 }
 
 window#waybar {
@@ -32,7 +32,7 @@ tooltip {
 #battery,
 #network,
 #pulseaudio {
-    padding: 2px 4px;
+    padding: 4px 6px;
 }
 
 #workspaces button {
@@ -65,7 +65,7 @@ tooltip {
 #tray,
 #battery {
     background-color: @black;
-    color: #a89984;
+    color: @white;
     margin: 0px 0px 0px 4px;
 }
 
@@ -95,6 +95,6 @@ tooltip {
 }
 
 #pulseaudio.muted {
-    border: 1px solid @red;
+    border: 2px solid @red;
     color: @red;
 }

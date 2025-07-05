@@ -17,11 +17,11 @@
     ],
 
     "modules-right": [
+        "pulseaudio",
+        "battery",
         "cpu",
         "memory",
-        "battery",
         "network",
-        "pulseaudio",
         "tray"
     ],
 
@@ -73,8 +73,8 @@
     },
 
     "network": {
-        "format-wifi" : "wifi {bandwidthDownBits}",
-        "format-ethernet": "enth {bandwidthDownBits}",
+        "format-wifi" : "wifi {bandwidthDownBytes}",
+        "format-ethernet": "enth {bandwidthDownBytes}",
         "format-disconnected" : "no network",
         "interval": 5,
         "tooltip": false
