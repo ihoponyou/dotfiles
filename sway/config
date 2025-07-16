@@ -133,12 +133,12 @@ blur_brightness 0.7
 
 for_window [tiling] opacity 0.9
 for_window [app_id=librewolf] opacity 1; blur disable;
-assign [app_id=librewolf] workspace 3
 for_window [app_id=gimp] opacity 1; blur disable;
 
-exec_always ~/dotfiles/wallpaper/start-swww.sh
+assign [app_id=librewolf] workspace 3
+assign [class=vesktop] workspace 4
 
-include /etc/sway/config.d/*
+exec_always ~/dotfiles/wallpaper/start-swww.sh
 
 # allow systemd units to target the sway session
 exec "systemctl --user import-environment {,WAYLAND_}DISPLAY SWAYSOCK; systemctl --user start sway-session.target"
@@ -149,3 +149,7 @@ exec swayidle -w \
          timeout 600 'swaymsg "output * power off"' resume 'swaymsg "output * power on"' \
          before-sleep 'swaylock -f -i $HOME/dotfiles/wallpaper/thinker.png -c 000000'
 
+exec rot8 -XYk
+exec wvkbd-mobintl --hidden
+
+include /etc/sway/config.d/*

@@ -13,7 +13,7 @@
     padding: 0;
     font-family: "monaspace neon";
     font-weight: 600;
-    font-size: 12px;
+    font-size: 13px;
 }
 
 window#waybar {
@@ -31,7 +31,10 @@ tooltip {
 #memory,
 #battery,
 #network,
-#pulseaudio {
+#pulseaudio,
+#custom-launcher,
+#custom-power,
+#custom-keyboard {
     padding: 4px 6px;
 }
 
@@ -53,9 +56,20 @@ tooltip {
     background-color: @red;
 }
 
+#custom-launcher,
+#custom-power,
+#custom-keyboard,
 #clock {
     background-color: @black;
     color: @white;
+    margin: 0px 0px 0px 4px;
+}
+
+#custom-launcher,
+#custom-power,
+#custom-keyboard {
+    font-size: 16px;
+    padding: 0px 8px;
 }
 
 #cpu,

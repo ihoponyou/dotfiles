@@ -457,7 +457,7 @@ return {
       --  - settings (table): Override the default settings passed when initializing the server.
       --        For example, to see the options for `lua_ls`, you could go to: https://luals.github.io/wiki/settings/
       local servers = {
-        omnisharp = {},
+        -- omnisharp = {},
         clangd = {
           cmd = { 'clangd', '--background-index', '--clang-tidy', '--log=verbose' },
         },
@@ -472,7 +472,6 @@ return {
         -- But for many setups, the LSP (`ts_ls`) will work just fine
         -- ts_ls = {},
         --
-
         lua_ls = {
           -- cmd = { ... },
           -- filetypes = { ... },
@@ -487,6 +486,7 @@ return {
             },
           },
         },
+        glsl_analyzer = {},
       }
 
       -- Ensure the servers and tools above are installed
@@ -608,7 +608,7 @@ return {
           -- Accept ([y]es) the completion.
           --  This will auto-import if your LSP supports it.
           --  This will expand snippets if the LSP sent a snippet.
-          ['<C-y>'] = cmp.mapping.confirm { select = true },
+          ['<Tab>'] = cmp.mapping.confirm { select = true },
 
           -- Manually trigger a completion from nvim-cmp.
           --  Generally you don't need this, because nvim-cmp will display

@@ -13,7 +13,10 @@
     ],
 
     "modules-center": [
-        "clock"
+        "custom/launcher",
+        "custom/keyboard",
+        "clock",
+        "custom/power"
     ],
 
     "modules-right": [
@@ -24,6 +27,24 @@
         "network",
         "tray"
     ],
+
+    "custom/launcher": {
+        "format": "",
+        "on-click": "nwggrid",
+        "tooltip": false
+    },
+
+    "custom/power": {
+        "format": "",
+        "on-click": "nwgbar",
+        "tooltip": false
+    },
+
+    "custom/keyboard": {
+        "format": "",
+        "on-click": "pkill -SIGRTMIN wvkbd",
+        "tooltip": false
+    },
 
     "sway/workspaces": {
         "disable-scroll": true,
@@ -99,4 +120,5 @@
         "on-click": "pavucontrol",
         "tooltip": false
     }
+
 }
