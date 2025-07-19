@@ -8,7 +8,7 @@ normal = { family = "Monaspace Neon", style = "Regular" }
 
 [general]
 import = [
-	"~/dotfiles/alacritty/themes/gruvbox_dark.toml"
+   "~/dotfiles/alacritty/themes/gruvbox_dark.toml"
 ]
 
 [keyboard]
