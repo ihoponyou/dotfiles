@@ -148,8 +148,7 @@ exec swayidle -w \
          timeout 300 'swaylock -f -i $HOME/dotfiles/wallpaper/thinker.png -c 000000' \
          timeout 600 'swaymsg "output * power off"' resume 'swaymsg "output * power on"' \
          before-sleep 'swaylock -f -i $HOME/dotfiles/wallpaper/thinker.png -c 000000'
-
-exec rot8 -XYk
+exec rot8 -XYk --threshold 0.1
 exec wvkbd-mobintl --hidden
 
 include /etc/sway/config.d/*
