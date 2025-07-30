@@ -2,25 +2,6 @@ return {
   -- Detect tabstop and shiftwidth automatically
   'tpope/vim-sleuth',
 
-  -- Use `opts = {}` to automatically pass options to a plugin's `setup()` function, forcing the plugin to be loaded.
-  --
-
-  -- Alternatively, use `config = function() ... end` for full control over the configuration.
-  -- If you prefer to call `setup` explicitly, use:
-  --    {
-  --        'lewis6991/gitsigns.nvim',
-  --        config = function()
-  --            require('gitsigns').setup({
-  --                -- Your gitsigns configuration here
-  --            })
-  --        end,
-  --    }
-  --
-  -- Here is a more advanced example where we pass configuration
-  -- options to `gitsigns.nvim`.
-  --
-  -- See `:help gitsigns` to understand what the configuration keys do
-
   -- Adds git related signs to the gutter, as well as utilities for managing changes
   {
     'lewis6991/gitsigns.nvim',
@@ -376,7 +357,8 @@ return {
           --
           -- When you move your cursor, the highlights will be cleared (the second autocommand).
           local client = vim.lsp.get_client_by_id(event.data.client_id)
-          if client then
+          local supports_highlight = client and client:supports_method('textDocument/documentHighlight', event.buf)
+          if client and supports_highlight then
             local highlight_augroup = vim.api.nvim_create_augroup('kickstart-lsp-highlight', { clear = false })
             vim.api.nvim_create_autocmd({ 'CursorHold', 'CursorHoldI' }, {
               buffer = event.buf,
@@ -440,53 +422,24 @@ return {
         },
       }
 
-      -- LSP servers and clients are able to communicate to each other what features they support.
-      --  By default, Neovim doesn't support everything that is in the LSP specification.
-      --  When you add nvim-cmp, luasnip, etc. Neovim now has *more* capabilities.
-      --  So, we create new capabilities with nvim cmp, and then broadcast that to the servers.
       local capabilities = vim.lsp.protocol.make_client_capabilities()
       capabilities = vim.tbl_deep_extend('force', capabilities, require('cmp_nvim_lsp').default_capabilities())
 
-      -- Enable the following language servers
-      --  Feel free to add/remove any LSPs that you want here. They will automatically be installed.
-      --
-      --  Add any additional override configuration in the following tables. Available keys are:
-      --  - cmd (table): Override the default command used to start the server
-      --  - filetypes (table): Override the default list of associated filetypes for the server
-      --  - capabilities (table): Override fields in capabilities. Can be used to disable certain LSP features.
-      --  - settings (table): Override the default settings passed when initializing the server.
-      --        For example, to see the options for `lua_ls`, you could go to: https://luals.github.io/wiki/settings/
       local servers = {
-        -- omnisharp = {},
         clangd = {
           cmd = { 'clangd', '--background-index', '--clang-tidy', '--log=verbose' },
         },
-        -- gopls = {},
         pyright = {},
-        -- rust_analyzer = {},
-        -- ... etc. See `:help lspconfig-all` for a list of all the pre-configured LSPs
-        --
-        -- Some languages (like typescript) have entire language plugins that can be useful:
-        --    https://github.com/pmizio/typescript-tools.nvim
-        --
-        -- But for many setups, the LSP (`ts_ls`) will work just fine
-        -- ts_ls = {},
-        --
         lua_ls = {
-          -- cmd = { ... },
-          -- filetypes = { ... },
-          -- capabilities = {},
           settings = {
             Lua = {
               completion = {
                 callSnippet = 'Replace',
               },
-              -- You can toggle below to ignore Lua_LS's noisy `missing-fields` warnings
               diagnostics = { disable = { 'missing-fields' } },
             },
           },
         },
-        glsl_analyzer = {},
       }
 
       -- Ensure the servers and tools above are installed
@@ -703,7 +656,22 @@ return {
     main = 'nvim-treesitter.configs', -- Sets main module to use for opts
     -- [[ Configure Treesitter ]] See `:help nvim-treesitter`
     opts = {
-      ensure_installed = { 'bash', 'c', 'diff', 'html', 'lua', 'luadoc', 'markdown', 'markdown_inline', 'query', 'vim', 'vimdoc' },
+      ensure_installed = {
+        'bash',
+        'c',
+        'diff',
+        'html',
+        'lua',
+        'luadoc',
+        'markdown',
+        'markdown_inline',
+        'query',
+        'vim',
+        'vimdoc',
+        'gdscript',
+        'godot_resource',
+        'gdshader',
+      },
       -- Autoinstall languages that are not installed
       auto_install = true,
       highlight = {
@@ -834,6 +802,14 @@ return {
         },
       }
 
+      dap.adapters = {
+        godot = {
+          type = 'server',
+          host = '127.0.0.1',
+          port = 6006,
+        },
+      }
+
       dap.configurations = {
         c = {
           {
@@ -866,6 +842,17 @@ return {
             request = 'launch',
             name = 'Launch file',
             program = '${file}',
+          },
+        },
+        gdscript = {
+          {
+            type = 'godot',
+            request = 'launch',
+            name = 'GDScript Godot: Launch scene',
+            project = '${workspaceFolder}',
+            launch_scene = true,
+            port = 6007,
+            debugServer = 6006,
           },
         },
       }
@@ -1009,12 +996,25 @@ return {
     ---@type oil.SetupOpts
     opts = {
       use_default_keymaps = true,
+      view_options = {
+        show_hidden = true,
+        -- is_always_hidden = function(name, bufnr)
+        -- if is_godot_project then
+        --   if vim.endswith(name, '.uid') then
+        --     return true
+        --   end
+        --   if name == 'server.pipe' then
+        --     return true
+        --   end
+        -- end
+        -- end,
+      },
     },
     keys = {
       {
         '\\',
         function()
-          require('oil').toggle_float()
+          require('oil').open()
         end,
         desc = 'open oil in cwd',
       },

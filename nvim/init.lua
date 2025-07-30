@@ -1,24 +1,24 @@
-vim.opt.tabstop = 4
-vim.opt.shiftwidth = 4
-vim.opt.shadafile = 'NONE'
-vim.opt.swapfile = false
-vim.opt.number = true
-vim.opt.relativenumber = true
-vim.opt.mouse = 'a'
-vim.opt.showmode = false
-vim.opt.breakindent = true
-vim.opt.undofile = true
-vim.opt.ignorecase = true
-vim.opt.smartcase = true
-vim.opt.signcolumn = 'yes'
-vim.opt.updatetime = 250
-vim.opt.timeoutlen = 300
-vim.opt.splitright = true
-vim.opt.splitbelow = true
-vim.opt.inccommand = 'split'
-vim.opt.cursorline = true
-vim.opt.scrolloff = 20
-vim.opt.confirm = true
+vim.o.tabstop = 4
+vim.o.shiftwidth = 4
+vim.o.shadafile = 'NONE'
+vim.o.swapfile = false
+vim.o.number = true
+vim.o.relativenumber = true
+vim.o.mouse = 'a'
+vim.o.showmode = false
+vim.o.breakindent = true
+vim.o.undofile = true
+vim.o.ignorecase = true
+vim.o.smartcase = true
+vim.o.signcolumn = 'yes'
+vim.o.updatetime = 250
+vim.o.timeoutlen = 300
+vim.o.splitright = true
+vim.o.splitbelow = true
+vim.o.inccommand = 'split'
+vim.o.cursorline = true
+vim.o.scrolloff = 20
+vim.o.confirm = true
 vim.schedule(function()
   vim.opt.clipboard = 'unnamedplus'
 end)
@@ -104,6 +104,32 @@ vim.keymap.set('n', '<leader>Trr', function()
 end, { desc = 'Neo[T]est: [r]un current file' })
 vim.keymap.set('n', '<leader>To', require('neotest').output_panel.toggle, { desc = 'Neo[T]est: toggle [o]utput panel' })
 vim.keymap.set('n', '<leader>Ts', require('neotest').summary.toggle, { desc = 'Neo[T]est: toggle [s]ummary window' })
+
+local paths_to_check = { '/', '/../' }
+local is_godot_project = false
+local godot_project_path = ''
+local cwd = vim.fn.getcwd()
+
+for key, value in pairs(paths_to_check) do
+  if vim.uv.fs_stat(cwd .. value .. 'project.godot') then
+    is_godot_project = true
+    godot_project_path = cwd .. value
+    break
+  end
+end
+
+local is_server_running = vim.uv.fs_stat(godot_project_path .. '/server.pipe')
+if is_godot_project and not is_server_running then
+  vim.fn.serverstart(godot_project_path .. '/server.pipe')
+end
+
+local lspconfig = require 'lspconfig'
+if is_godot_project then
+  lspconfig.gdscript.setup {
+    name = 'godot',
+    cmd = vim.lsp.rpc.connect('127.0.0.1', 6005),
+  }
+end
 
 -- The line beneath this is called `modeline`. See `:help modeline`
 -- vim: ts=2 sts=2 sw=2 et
