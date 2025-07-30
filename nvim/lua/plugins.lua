@@ -848,9 +848,11 @@ return {
           {
             type = 'godot',
             request = 'launch',
-            name = 'Launch scene',
+            name = 'GDScript Godot: Launch scene',
             project = '${workspaceFolder}',
             launch_scene = true,
+            port = 6007,
+            debugServer = 6006,
           },
         },
       }

@@ -34,6 +34,7 @@ ifneq ($(OS),Windows_NT)
 	ln -sf $(realpath waybar) $(xdg_config_home)
 	ln -sf $(realpath .bashrc) $$HOME
 	ln -sf $(realpath .tmux.conf) $$HOME
+	ln -sf $(realpath godot) $(xdg_config_home_default)
 endif
 
 clean:
@@ -45,6 +46,7 @@ ifneq ($(OS),Windows_NT)
 	rm $(xdg_config_home)/waybar
 	rm $$HOME/.bashrc
 	rm $$HOME/.tmux.conf
+	rm $(xdg_config_home_default)/godot
 endif
 
 .PHONY: all link make-dirs clean
