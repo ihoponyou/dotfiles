@@ -430,6 +430,7 @@ return {
           cmd = { 'clangd', '--background-index', '--clang-tidy', '--log=verbose' },
         },
         pyright = {},
+        ts_ls = {},
         lua_ls = {
           settings = {
             Lua = {
