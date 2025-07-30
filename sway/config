@@ -91,7 +91,7 @@ bindsym $mod_alt+Shift+2 exec obs-cmd replay save
 # mouse button for dragging.
 floating_modifier $mod normal
 
-input type:pointer accel_profile "flat"sway
+input type:pointer accel_profile "flat"
 
 input type:keyboard {
     xkb_numlock on
