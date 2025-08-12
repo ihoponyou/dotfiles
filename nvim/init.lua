@@ -1,24 +1,24 @@
-vim.o.tabstop = 4
-vim.o.shiftwidth = 4
-vim.o.shadafile = 'NONE'
-vim.o.swapfile = false
-vim.o.number = true
-vim.o.relativenumber = true
-vim.o.mouse = 'a'
-vim.o.showmode = false
-vim.o.breakindent = true
-vim.o.undofile = true
-vim.o.ignorecase = true
-vim.o.smartcase = true
-vim.o.signcolumn = 'yes'
-vim.o.updatetime = 250
-vim.o.timeoutlen = 300
-vim.o.splitright = true
-vim.o.splitbelow = true
-vim.o.inccommand = 'split'
-vim.o.cursorline = true
-vim.o.scrolloff = 20
-vim.o.confirm = true
+vim.opt.tabstop = 4
+vim.opt.shiftwidth = 4
+vim.opt.shadafile = 'NONE'
+vim.opt.swapfile = false
+vim.opt.number = true
+vim.opt.relativenumber = true
+vim.opt.mouse = 'a'
+vim.opt.showmode = true
+vim.opt.breakindent = true
+vim.opt.undofile = true
+vim.opt.ignorecase = true
+vim.opt.smartcase = true
+vim.opt.signcolumn = 'yes'
+vim.opt.updatetime = 250
+vim.opt.timeoutlen = 300
+vim.opt.splitright = true
+vim.opt.splitbelow = true
+vim.opt.inccommand = 'split'
+vim.opt.cursorline = true
+vim.opt.scrolloff = 20
+vim.opt.confirm = true
 vim.schedule(function()
   vim.opt.clipboard = 'unnamedplus'
 end)
@@ -26,6 +26,12 @@ end)
 vim.g.have_nerd_font = true
 vim.g.mapleader = ' '
 vim.g.maplocalleader = ' '
+
+vim.api.nvim_create_autocmd('BufEnter', {
+  callback = function()
+    vim.opt.formatoptions:remove { 'c', 'r', 'o' }
+  end,
+})
 
 vim.api.nvim_create_autocmd('TermOpen', {
   callback = function(_)
@@ -118,9 +124,9 @@ for key, value in pairs(paths_to_check) do
   end
 end
 
-local is_server_running = vim.uv.fs_stat(godot_project_path .. '/server.pipe')
+local is_server_running = false --vim.uv.fs_stat(godot_project_path .. '/server.pipe')
 if is_godot_project and not is_server_running then
-  vim.fn.serverstart(godot_project_path .. '/server.pipe')
+  vim.fn.serverstart '::1:6010'
 end
 
 local lspconfig = require 'lspconfig'
@@ -130,6 +136,8 @@ if is_godot_project then
     cmd = vim.lsp.rpc.connect('127.0.0.1', 6005),
   }
 end
+
+vim.cmd ':hi statusline guibg=NONE'
 
 -- The line beneath this is called `modeline`. See `:help modeline`
 -- vim: ts=2 sts=2 sw=2 et
