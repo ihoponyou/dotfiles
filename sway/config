@@ -83,6 +83,7 @@ bindsym --locked XF86MonBrightnessUp exec brightnessctl set 5%+
 
 bindsym $mod_alt+Shift+1 exec slurp | grim -g - - | tee ~/Pictures/screenshots/$(date +%F_%H-%M-%S).png | wl-copy
 bindsym $mod_alt+Shift+2 exec obs-cmd replay save
+bindsym $mod_alt+Shift+3 exec grim -g "$(slurp -p)" -t ppm - | convert - -format '%[pixel:p{0,0}]' txt:- | tail -n 1 | cut -d ' ' -f 4 | wl-copy
 
 # Drag floating windows by holding down $mod and left mouse button.
 # Resize them with right mouse button + $mod.
@@ -99,7 +100,10 @@ input type:keyboard {
 }
 
 output DP-1 resolution 1920x1080@240Hz
-output DP-2 resolution 1920x1080@144Hz
+output DP-2 {
+    resolution 1920x1080@144Hz
+    transform 270 
+}
 
 workspace 1    output DP-1
 workspace 2    output DP-2
