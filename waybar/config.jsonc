@@ -72,7 +72,7 @@
     },
 
     "memory": {
-        "format": "mem {percentage}%",
+        "format": "ram {percentage}%",
         "interval": 2,
 
         "states": {

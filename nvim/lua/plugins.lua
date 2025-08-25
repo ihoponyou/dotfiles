@@ -887,11 +887,10 @@ return {
 
   {
     'lervag/vimtex',
-    lazy = false, -- we don't want to lazy load VimTeX
-    -- tag = "v2.15", -- uncomment to pin to a specific release
+    lazy = false,
     init = function()
       -- VimTeX configuration goes here, e.g.
-      vim.g.vimtex_view_method = 'zathura'
+      vim.g.vimtex_view_method = 'zathura_simple'
     end,
   },
 
@@ -965,12 +964,13 @@ return {
     ---@module 'oil'
     ---@type oil.SetupOpts
     opts = {
+      default_file_explorer = false,
       use_default_keymaps = true,
       view_options = {
         show_hidden = true,
       },
       float = {
-        padding = 12,
+        padding = 16,
         border = 'solid',
       },
     },
