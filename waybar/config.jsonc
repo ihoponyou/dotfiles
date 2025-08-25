@@ -15,6 +15,7 @@
 
     "modules-center": [
         "clock",
+        "custom/power"
     ],
 
     "modules-right": [
@@ -98,6 +99,12 @@
         },
         "nospacing": 1,
         "on-click": "pavucontrol",
+        "tooltip": false
+    },
+
+    "custom/power": {
+        "format": "",
+        "on-click": "nwg-bar",
         "tooltip": false
     }
 
