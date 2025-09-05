@@ -4,10 +4,15 @@
 keycode = 4194326
 
 [resource]
-interface/theme/preset = "Gray"
-interface/theme/base_color = Color(0.24, 0.24, 0.24, 1)
-interface/theme/accent_color = Color(0.44, 0.73, 0.98, 1)
+interface/editor/main_font_size = 12
+interface/editor/code_font_size = 12
+interface/theme/preset = "Godot 2"
+interface/theme/spacing_preset = "Compact"
+interface/theme/base_color = Color(0.24, 0.23, 0.27, 1)
+interface/theme/accent_color = Color(0.53, 0.67, 0.89, 1)
 interface/theme/contrast = 0.3
+interface/theme/base_spacing = 0
+interface/theme/additional_spacing = 4
 text_editor/appearance/minimap/minimap_width = 50
 text_editor/behavior/files/auto_reload_scripts_on_external_change = true
 text_editor/external/exec_path = "nvim"

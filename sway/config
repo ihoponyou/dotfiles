@@ -82,6 +82,8 @@ bindsym --locked XF86MonBrightnessDown exec brightnessctl set 5%-
 bindsym --locked XF86MonBrightnessUp exec brightnessctl set 5%+
 
 bindsym $mod_alt+Shift+1 exec slurp | grim -g - - | tee ~/Pictures/screenshots/$(date +%F_%H-%M-%S).png | wl-copy
+bindsym $mod_alt+Shift+2 exec obs-cmd replay save
+bindsym $mod_alt+Shift+3 exec grim -g "$(slurp -p)" -t ppm - | convert - -format '%[pixel:p{0,0}]' txt:- | tail -n 1 | cut -d ' ' -f 4 | wl-copy
 
 # Drag floating windows by holding down $mod and left mouse button.
 # Resize them with right mouse button + $mod.
@@ -103,6 +105,26 @@ input type:touchpad {
     middle_emulation enabled
     natural_scroll enabled
 }
+
+output DP-1 {
+    resolution 1920x1080@240Hz
+    adaptive_sync on
+}
+output DP-2 {
+    resolution 1920x1080@144Hz
+    transform 270 
+}
+
+workspace 1    output DP-1
+workspace 2    output DP-2
+workspace 3    output DP-1
+workspace 4    output DP-2
+workspace 5    output DP-1
+workspace 6    output DP-2
+workspace 7    output DP-1
+workspace 8    output DP-2
+workspace 9    output DP-1
+workspace 10   output DP-2
 
 # gruvbox dark
 set $red #cc241d
@@ -146,10 +168,8 @@ exec "systemctl --user import-environment {,WAYLAND_}DISPLAY SWAYSOCK; systemctl
 exec swaymsg -t subscribe '["shutdown"]' && systemctl --user stop sway-session.target
 
 exec swayidle -w \
-         timeout 300 'swaylock -f -i $HOME/dotfiles/wallpaper/thinker.png -c 000000' \
-         timeout 600 'swaymsg "output * power off"' resume 'swaymsg "output * power on"' \
+         timeout 1800 'swaylock -f -i $HOME/dotfiles/wallpaper/thinker.png -c 000000' \
+         timeout 3600 'swaymsg "output * power off"' resume 'swaymsg "output * power on"' \
          before-sleep 'swaylock -f -i $HOME/dotfiles/wallpaper/thinker.png -c 000000'
-exec rot8 -XYk --threshold 0.1
-exec wvkbd-mobintl --hidden
 
 include /etc/sway/config.d/*
