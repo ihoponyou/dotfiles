@@ -99,7 +99,17 @@ input type:keyboard {
     xkb_options caps:escape
 }
 
-output DP-1 resolution 1920x1080@240Hz
+input type:touchpad {
+    dwt disabled
+    tap enabled
+    middle_emulation enabled
+    natural_scroll enabled
+}
+
+output DP-1 {
+    resolution 1920x1080@240Hz
+    adaptive_sync on
+}
 output DP-2 {
     resolution 1920x1080@144Hz
     transform 270 
@@ -158,8 +168,8 @@ exec "systemctl --user import-environment {,WAYLAND_}DISPLAY SWAYSOCK; systemctl
 exec swaymsg -t subscribe '["shutdown"]' && systemctl --user stop sway-session.target
 
 exec swayidle -w \
-         timeout 600 'swaylock -f -i $HOME/dotfiles/wallpaper/thinker.png -c 000000' \
-         timeout 1200 'swaymsg "output * power off"' resume 'swaymsg "output * power on"' \
+         timeout 1800 'swaylock -f -i $HOME/dotfiles/wallpaper/thinker.png -c 000000' \
+         timeout 3600 'swaymsg "output * power off"' resume 'swaymsg "output * power on"' \
          before-sleep 'swaylock -f -i $HOME/dotfiles/wallpaper/thinker.png -c 000000'
 
 include /etc/sway/config.d/*

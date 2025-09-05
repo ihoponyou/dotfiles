@@ -1,24 +1,24 @@
-vim.o.tabstop = 4
-vim.o.shiftwidth = 4
-vim.o.shadafile = 'NONE'
-vim.o.swapfile = false
-vim.o.number = true
-vim.o.relativenumber = true
-vim.o.mouse = 'a'
-vim.o.showmode = false
-vim.o.breakindent = true
-vim.o.undofile = true
-vim.o.ignorecase = true
-vim.o.smartcase = true
-vim.o.signcolumn = 'yes'
-vim.o.updatetime = 250
-vim.o.timeoutlen = 300
-vim.o.splitright = true
-vim.o.splitbelow = true
-vim.o.inccommand = 'split'
-vim.o.cursorline = true
-vim.o.scrolloff = 20
-vim.o.confirm = true
+vim.opt.tabstop = 4
+vim.opt.shiftwidth = 4
+vim.opt.shadafile = 'NONE'
+vim.opt.swapfile = false
+vim.opt.number = true
+vim.opt.relativenumber = true
+vim.opt.mouse = 'a'
+vim.opt.showmode = true
+vim.opt.breakindent = true
+vim.opt.undofile = true
+vim.opt.ignorecase = true
+vim.opt.smartcase = true
+vim.opt.signcolumn = 'yes'
+vim.opt.updatetime = 250
+vim.opt.timeoutlen = 300
+vim.opt.splitright = true
+vim.opt.splitbelow = true
+vim.opt.inccommand = 'split'
+vim.opt.cursorline = true
+vim.opt.scrolloff = 20
+vim.opt.confirm = true
 vim.schedule(function()
   vim.opt.clipboard = 'unnamedplus'
 end)
@@ -27,10 +27,16 @@ vim.g.have_nerd_font = true
 vim.g.mapleader = ' '
 vim.g.maplocalleader = ' '
 
+vim.api.nvim_create_autocmd('BufEnter', {
+  callback = function()
+    vim.opt.formatoptions:remove { 'c', 'r', 'o' }
+  end,
+})
+
 vim.api.nvim_create_autocmd('TermOpen', {
   callback = function(_)
-    vim.o.number = false
-    vim.o.relativenumber = false
+    vim.opt.number = false
+    vim.opt.relativenumber = false
   end,
 })
 
@@ -88,12 +94,14 @@ vim.keymap.set('n', '<C-h>', '<C-w><C-h>', { desc = 'Move focus to the left wind
 vim.keymap.set('n', '<C-l>', '<C-w><C-l>', { desc = 'Move focus to the right window' })
 vim.keymap.set('n', '<C-j>', '<C-w><C-j>', { desc = 'Move focus to the lower window' })
 vim.keymap.set('n', '<C-k>', '<C-w><C-k>', { desc = 'Move focus to the upper window' })
+
 -- NOTE: This won't work in all terminal emulators/tmux/etc. Try your own mapping
 -- or just use <C-\><C-n> to exit terminal mode
 vim.keymap.set('t', '<Esc><Esc>', '<C-\\><C-n>', { desc = 'Exit terminal mode' })
+
 -- allows vertical line navigation on long wrapped lines
-vim.keymap.set('n', 'j', 'gj')
-vim.keymap.set('n', 'k', 'gk')
+-- vim.keymap.set('n', 'j', 'gj')
+-- vim.keymap.set('n', 'k', 'gk')
 
 vim.keymap.set('n', '<leader>Trn', require('neotest').run.run, { desc = 'Neo[t]est: [r]un [n]earest test' })
 vim.keymap.set('n', '<leader>Tdn', function()
@@ -138,6 +146,8 @@ if is_godot_project then
     cmd = vim.lsp.rpc.connect('127.0.0.1', GODOT_LSP_PORT),
   }
 end
+
+vim.cmd ':hi statusline guibg=NONE'
 
 -- The line beneath this is called `modeline`. See `:help modeline`
 -- vim: ts=2 sts=2 sw=2 et

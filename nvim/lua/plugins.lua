@@ -66,19 +66,6 @@ return {
     },
   },
 
-  -- This is often very useful to both group configuration, as well as handle
-  -- lazy loading plugins that don't need to be loaded immediately at startup.
-  --
-  -- For example, in the following configuration, we use:
-  --  event = 'VimEnter'
-  --
-  -- which loads which-key before all the UI elements are loaded. Events can be
-  -- normal autocommands events (`:help autocmd-events`).
-  --
-  -- Then, because we use the `opts` key (recommended), the configuration runs
-  -- after the plugin has been loaded as `require(MODULE).setup(opts)`.
-
-  -- Useful plugin to show you pending keybinds.
   {
     'folke/which-key.nvim',
     event = 'VimEnter', -- Sets the loading event to 'VimEnter'
@@ -125,12 +112,6 @@ return {
     },
   },
 
-  -- NOTE: Plugins can specify dependencies.
-  --
-  -- The dependencies are proper plugin specifications as well - anything
-  -- you do for a plugin at the top level, you can do for a dependency.
-  --
-  -- Use the `dependencies` key to specify the dependencies of a particular plugin
   -- Fuzzy Finder (files, lsp, etc)
   {
     'nvim-telescope/telescope.nvim',
@@ -257,7 +238,6 @@ return {
     dependencies = {
       -- Automatically install LSPs and related tools to stdpath for Neovim
       -- Mason must be loaded before its dependents so we need to set it up here.
-      -- NOTE: `opts = {}` is the same as calling `require('mason').setup({})`
       {
         'williamboman/mason.nvim',
         opts = {},
@@ -397,7 +377,6 @@ return {
       -- See :help vim.diagnostic.Opts
       vim.diagnostic.config {
         severity_sort = true,
-        float = { border = 'rounded', source = 'if_many' },
         underline = { severity = vim.diagnostic.severity.ERROR },
         signs = vim.g.have_nerd_font and {
           text = {
@@ -636,17 +615,17 @@ return {
       -- Simple and easy statusline.
       --  You could remove this setup call if you don't like it,
       --  and try some other statusline plugin
-      local statusline = require 'mini.statusline'
+      -- local statusline = require 'mini.statusline'
       -- set use_icons to true if you have a Nerd Font
-      statusline.setup { use_icons = vim.g.have_nerd_font, content = {} }
+      -- statusline.setup { use_icons = vim.g.have_nerd_font, content = {} }
 
       -- You can configure sections in the statusline by overriding their
       -- default behavior. For example, here we set the section for
       -- cursor location to LINE:COLUMN
       ---@diagnostic disable-next-line: duplicate-set-field
-      statusline.section_location = function()
-        return '%2l:%-2v'
-      end
+      -- statusline.section_location = function()
+      --   return '%2l:%-2v'
+      -- end
     end,
   },
 
@@ -709,21 +688,12 @@ return {
 
   -- debugger
   {
-    -- NOTE: Yes, you can install new plugins here!
     'mfussenegger/nvim-dap',
-    -- NOTE: And you can specify dependencies as well
     dependencies = {
-      -- Creates a beautiful debugger UI
       'rcarriga/nvim-dap-ui',
-
-      -- Required dependency for nvim-dap-ui
       'nvim-neotest/nvim-nio',
-
-      -- Installs the debug adapters for you
       'williamboman/mason.nvim',
       'jay-babu/mason-nvim-dap.nvim',
-
-      -- Add your own debuggers here
       'leoluz/nvim-dap-go',
       'mfussenegger/nvim-dap-python',
     },
@@ -918,11 +888,10 @@ return {
 
   {
     'lervag/vimtex',
-    lazy = false, -- we don't want to lazy load VimTeX
-    -- tag = "v2.15", -- uncomment to pin to a specific release
+    lazy = false,
     init = function()
       -- VimTeX configuration goes here, e.g.
-      vim.g.vimtex_view_method = 'zathura'
+      vim.g.vimtex_view_method = 'zathura_simple'
     end,
   },
 
@@ -996,26 +965,21 @@ return {
     ---@module 'oil'
     ---@type oil.SetupOpts
     opts = {
+      default_file_explorer = false,
       use_default_keymaps = true,
       view_options = {
         show_hidden = true,
-        -- is_always_hidden = function(name, bufnr)
-        -- if is_godot_project then
-        --   if vim.endswith(name, '.uid') then
-        --     return true
-        --   end
-        --   if name == 'server.pipe' then
-        --     return true
-        --   end
-        -- end
-        -- end,
+      },
+      float = {
+        padding = 16,
+        border = 'solid',
       },
     },
     keys = {
       {
         '\\',
         function()
-          require('oil').open()
+          require('oil').toggle_float()
         end,
         desc = 'open oil in cwd',
       },
@@ -1037,13 +1001,6 @@ return {
       { '<leader>gc', '<cmd>Neogit commit<cr>', desc = 'open Neo[g]it [c]ommit popup' },
     },
     lazy = false,
-  },
-
-  {
-    'folke/zen-mode.nvim',
-    keys = {
-      { '<leader>z', '<cmd>ZenMode<cr>', desc = 'toggle zen mode' },
-    },
   },
 
   {
@@ -1086,5 +1043,15 @@ return {
         },
       }
     end,
+  },
+
+  {
+    'iamcco/markdown-preview.nvim',
+    cmd = { 'MarkdownPreviewToggle', 'MarkdownPreview', 'MarkdownPreviewStop' },
+    build = 'cd app && yarn install',
+    init = function()
+      vim.g.mkdp_filetypes = { 'markdown' }
+    end,
+    ft = { 'markdown' },
   },
 }
