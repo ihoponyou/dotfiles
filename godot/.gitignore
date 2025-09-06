@@ -1,2 +1,4 @@
-app_userdata/
-recent_dirs
+*
+!*/
+
+!*editor_settings*

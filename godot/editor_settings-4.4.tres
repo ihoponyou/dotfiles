@@ -1,6 +1,6 @@
 [gd_resource type="EditorSettings" load_steps=2 format=3]
 
-[sub_resource type="InputEventKey" id="InputEventKey_tv52g"]
+[sub_resource type="InputEventKey" id="InputEventKey_slpry"]
 keycode = 4194326
 
 [resource]
@@ -44,9 +44,10 @@ _script_setup_use_script_templates = false
 network/debug_adapter/sync_breakpoints = true
 network/language_server/show_native_symbols_in_editor = true
 network/language_server/use_thread = true
+export/windows/signtool = ""
 shortcuts = [{
 "name": "spatial_editor/viewport_zoom_modifier_1",
-"shortcuts": [SubResource("InputEventKey_tv52g")]
+"shortcuts": [SubResource("InputEventKey_slpry")]
 }, {
 "name": "spatial_editor/viewport_zoom_modifier_2",
 "shortcuts": []
