@@ -420,6 +420,7 @@ return {
             },
           },
         },
+        jdtls = {},
       }
 
       -- Ensure the servers and tools above are installed
