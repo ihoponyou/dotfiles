@@ -99,8 +99,8 @@ vim.keymap.set('n', '<C-k>', '<C-w><C-k>', { desc = 'Move focus to the upper win
 vim.keymap.set('t', '<Esc><Esc>', '<C-\\><C-n>', { desc = 'Exit terminal mode' })
 
 -- allows vertical line navigation on long wrapped lines
-vim.keymap.set('n', 'j', 'gj')
-vim.keymap.set('n', 'k', 'gk')
+-- vim.keymap.set('n', 'j', 'gj')
+-- vim.keymap.set('n', 'k', 'gk')
 
 vim.keymap.set('n', '<leader>Trn', require('neotest').run.run, { desc = 'Neo[t]est: [r]un [n]earest test' })
 vim.keymap.set('n', '<leader>Tdn', function()
