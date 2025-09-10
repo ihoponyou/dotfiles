@@ -3,7 +3,7 @@ style.shape = "Block"
 style.blinking = "On"
 
 [font]
-size = 13.0
+size = 11.5
 normal = { family = "Monaspace Neon", style = "Regular" }
 
 [general]
