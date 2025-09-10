@@ -19,18 +19,10 @@ _MAGENTA=$(tput setaf 5)
 _ORANGE=$(tput setaf 208)
 _BOLD=$(tput bold)
 _RESET=$(tput sgr0)
-# PS1='['
-# PS1+='${_BOLD}${_YELLOW}\u${_RESET}'
-# PS1+='${_GREEN}@'
-# PS1+='${_BOLD}${_YELLOW}\h '
-# PS1+='${_BLUE}\@ '
-# PS1+='${_BOLD}${_BLUE}\w${_RESET}${_MAGENTA}$(__git_ps1)${_RESET}'
-# PS1+=']'
-# PS1+='\n\$ '
 
 PS1=' ${_BOLD}${_YELLOW}\w${_RESET}'
 PS1+='${_BLUE}$(__git_ps1)${_RESET}'
-PS1+='${_BOLD}${_MAGENTA}\n λ ${_RESET}'
+PS1+='\n ${_BOLD}${_MAGENTA}λ${_RESET} '
 
 # Use bash-completion, if available
 [[ $PS1 && -f /usr/share/bash-completion/bash_completion ]] && \

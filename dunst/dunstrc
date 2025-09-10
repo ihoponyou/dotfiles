@@ -1,0 +1,35 @@
+# https://github.com/GrumpyRumpus/dotfiles/blob/main/.config/dunst/dunstrc
+
+[global]
+min_icon_size = 64
+width = 300
+offset = (4, 4)
+gap_size = 4
+frame_width = 1
+line_height = 2
+sort = update
+separator_color= frame
+highlight = "#74c7ec"
+background = "#282828"
+foreground = "#ebdbb2"
+frame_color = "#ebdbb2"
+corners = top-left,bottom
+corner_radius = 5
+progress_bar_corners = top-left,bottom-right
+progress_bar_corner_radius = 5
+format = "<b>󰁕 %a</b>\n%s\n<i>%b</i>"
+font = Monaspace Neon 9
+
+[urgency_low]
+foreground = "#b8bb26"
+frame_color = "#98971a"
+
+[urgency_normal]
+foreground = "#a89984"
+frame_color = "#a89984"
+
+[urgency_critical]
+foreground = "#fb4934"
+frame_color = "#fb4934"
+
+# vim: ft=cfg
