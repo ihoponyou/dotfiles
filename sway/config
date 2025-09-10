@@ -9,6 +9,8 @@ set $term alacritty
 set $menu tofi-drun | xargs swaymsg exec --
 set $alt_menu tofi-run | xargs swaymsg exec --
 set $browser librewolf
+set $wallpaper_img ~/dotfiles/wallpaper/thinker.png 
+set $lock_screen swaylock -f -i $wallpaper_img -c 000000 
 
 bindsym $mod+Return exec $term
 bindsym $mod+Shift+q kill
@@ -16,9 +18,16 @@ bindsym $mod+d exec $menu
 bindsym $mod+Shift+d exec $alt_menu
 bindsym $mod+b exec $browser; workspace 3
 
+set $logout swaynag \
+    -f 'Monaspace Neon 10' \
+    --border-bottom-size 0 \
+    -t warning \
+    -m 'Are you sure you want to...' \
+    -B 'LOG OUT?' 'swaymsg exit' \
+    -s 'No.'
+bindsym $mod+Shift+e exec $logout
 bindsym $mod+Shift+c reload
-bindsym $mod+Shift+e exec swaynag -t warning -m '' -B 'LOG OUT' 'swaymsg exit'
-bindsym $mod+$mod_alt+Shift+l exec swaylock -i $HOME/dotfiles/wallpaper/thinker.png -c 000000 
+bindsym $mod+$mod_alt+Shift+l exec $lock_screen
 
 bindsym $mod+$left focus left
 bindsym $mod+$down focus down
@@ -70,7 +79,6 @@ mode "resize" {
     bindsym $up resize shrink height 10px
     bindsym $right resize grow width 10px
 
-    bindsym Return mode "default"
     bindsym Escape mode "default"
 }
 bindsym $mod+r mode "resize"
@@ -83,15 +91,13 @@ bindsym --locked XF86AudioMicMute exec pactl set-source-mute \@DEFAULT_SOURCE@ t
 bindsym --locked XF86MonBrightnessDown exec brightnessctl set 5%-
 bindsym --locked XF86MonBrightnessUp exec brightnessctl set 5%+
 
-bindsym $mod_alt+Shift+1 exec slurp | grim -g - - | tee ~/Pictures/screenshots/$(date +%F_%H-%M-%S).png | wl-copy
-bindsym $mod_alt+Shift+2 exec obs-cmd replay save
-bindsym $mod_alt+Shift+3 exec grim -g "$(slurp -p)" -t ppm - | convert - -format '%[pixel:p{0,0}]' txt:- | tail -n 1 | cut -d ' ' -f 4 | wl-copy
+set $screenshot slurp | grim -g - - | tee ~/Pictures/screenshots/$(date +%F_%H-%M-%S).png | wl-copy
+set $clip obs-cmd replay save
+set $get_color grim -g "$(slurp -p)" -t ppm - | convert - -format '%[pixel:p{0,0}]' txt:- | tail -n 1 | cut -d ' ' -f 4 | wl-copy
+bindsym $mod_alt+Shift+1 exec $screenshot
+bindsym $mod_alt+Shift+2 exec $clip
+bindsym $mod_alt+Shift+3 exec $get_color
 
-# Drag floating windows by holding down $mod and left mouse button.
-# Resize them with right mouse button + $mod.
-# Despite the name, also works for non-floating windows.
-# Change normal to inverse to use left mouse button for resizing and right
-# mouse button for dragging.
 floating_modifier $mod normal
 
 input type:pointer accel_profile "flat"
@@ -100,33 +106,6 @@ input type:keyboard {
     xkb_numlock on
     xkb_options caps:escape
 }
-
-input type:touchpad {
-    dwt disabled
-    tap enabled
-    middle_emulation enabled
-    natural_scroll enabled
-}
-
-output DP-1 {
-    resolution 1920x1080@240Hz
-    adaptive_sync on
-}
-output DP-2 {
-    resolution 1920x1080@144Hz
-    transform 270 
-}
-
-workspace 1    output DP-1
-workspace 2    output DP-2
-workspace 3    output DP-1
-workspace 4    output DP-2
-workspace 5    output DP-1
-workspace 6    output DP-2
-workspace 7    output DP-1
-workspace 8    output DP-2
-workspace 9    output DP-1
-workspace 10   output DP-2
 
 # gruvbox dark
 set $red #cc241d
@@ -164,14 +143,13 @@ assign [app_id=librewolf] workspace 3
 assign [class=vesktop] workspace 4
 
 exec_always ~/dotfiles/wallpaper/start-swww.sh
+exec swayidle -w \
+     timeout 1800 '$lock_screen' \
+     timeout 3600 'swaymsg "output * power off"' resume 'swaymsg "output * power on"' \
+     before-sleep '$lock_screen'
 
 # allow systemd units to target the sway session
 exec "systemctl --user import-environment {,WAYLAND_}DISPLAY SWAYSOCK; systemctl --user start sway-session.target"
 exec swaymsg -t subscribe '["shutdown"]' && systemctl --user stop sway-session.target
-
-exec swayidle -w \
-         timeout 1800 'swaylock -f -i $HOME/dotfiles/wallpaper/thinker.png -c 000000' \
-         timeout 3600 'swaymsg "output * power off"' resume 'swaymsg "output * power on"' \
-         before-sleep 'swaylock -f -i $HOME/dotfiles/wallpaper/thinker.png -c 000000'
 
 include /etc/sway/config.d/*
