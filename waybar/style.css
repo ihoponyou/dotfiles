@@ -63,7 +63,7 @@ tooltip {
 #clock {
     background-color: @black;
     color: @white;
-    margin: 0px 4px 0px 0px;
+    margin: 0px 0px 0px 4px;
 }
 
 #cpu,

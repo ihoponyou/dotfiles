@@ -10,15 +10,15 @@
 
     "modules-left": [
         "sway/workspaces",
-        "sway/scratchpad",
-        "sway/mode",
-        "custom/launcher",
-        "custom/keyboard",
-        "custom/power",
+        "sway/mode"
     ],
 
     "modules-center": [
+        "custom/launcher",
+        "custom/keyboard",
         "clock",
+        "custom/power",
+        "sway/scratchpad"
     ],
 
     "modules-right": [
