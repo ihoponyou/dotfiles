@@ -34,6 +34,7 @@ tooltip {
 #custom-launcher,
 #custom-power,
 #custom-keyboard,
+#custom-screenshot,
 #scratchpad {
     padding: 4px 6px;
 }
@@ -42,9 +43,6 @@ tooltip {
     all: initial;
     min-width: 0;
     padding: 4px 6px;
-    background-color: @black;
-    color: @white;
-    margin: 0px 4px 0px 0px;
 }
 
 #workspaces button.focused {
@@ -60,7 +58,9 @@ tooltip {
 #custom-launcher,
 #custom-power,
 #custom-keyboard,
-#clock {
+#custom-screenshot,
+#clock,
+#workspaces {
     background-color: @black;
     color: @white;
     margin: 0px 4px 0px 0px;
