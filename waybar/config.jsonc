@@ -10,11 +10,11 @@
 
     "modules-left": [
         "sway/workspaces",
-        "sway/scratchpad",
-        "sway/mode",
         "custom/launcher",
         "custom/keyboard",
         "custom/power",
+        "sway/scratchpad",
+        "sway/mode",
     ],
 
     "modules-center": [
@@ -54,7 +54,7 @@
     },
 
     "cpu": {
-        "format": "cpu {usage}%",
+        "format": "cpu {usage:2}%",
         "interval": 2,
 
         "states": {
@@ -63,7 +63,7 @@
     },
 
     "memory": {
-        "format": "ram {percentage}%",
+        "format": "ram {percentage:2}%",
         "interval": 2,
 
         "states": {
@@ -72,9 +72,9 @@
     },
 
     "battery": {
-        "format": "bat {capacity}%",
-        "format-charging": "󰂄 {capacity}%",
-        "format-plugged": "󰚥 {capacity}%",
+        "format": "bat {capacity:2}%",
+        "format-charging": "󰂄 {capacity:2}%",
+        "format-plugged": "󰚥 {capacity:2}%",
         "format-icons": ["󰂎", "󰁺", "󰁻", "󰁼", "󰁽", "󰁾", "󰁿", "󰂀", "󰂁", "󰂂", "󰁹"],
         "interval": 5,
         "states": {
@@ -95,8 +95,8 @@
     "pulseaudio": {
         "scroll-step": 5,
         "max-volume": 150,
-        "format": "vol {volume}%",
-        "format-bluetooth": " vol {volume}%",
+        "format": "vol {volume:2}%",
+        "format-bluetooth": " vol {volume:2}%",
         "format-muted": "vol muted",
         "format-icons": {
             "headphones": "",
