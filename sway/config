@@ -17,6 +17,7 @@ bindsym $mod+Shift+q kill
 bindsym $mod+d exec $menu
 bindsym $mod+Shift+d exec $alt_menu
 bindsym $mod+b exec $browser; workspace 3
+bindsym $mod+equal exec ~/dotfiles/timewarrior/set-tag.sh
 
 set $logout swaynag \
     -f 'Monaspace Neon 10' \

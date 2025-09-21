@@ -44,8 +44,11 @@ tooltip {
     margin-left: 4px;
 }
 
+#custom-timew-tag {
+    font-weight: 800;
+}
+
 #mode {
-    color: @white;
     background-color: transparent;
     font-weight: 800;
 }
