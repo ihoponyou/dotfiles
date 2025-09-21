@@ -22,6 +22,8 @@
     ],
 
     "modules-right": [
+        "custom/timew-tag",
+        "custom/timew-elapsed",
         "battery",
         "pulseaudio",
         "cpu",
@@ -129,4 +131,16 @@
         "on-click": "pkill -SIGRTMIN wvkbd",
         "tooltip": false
     },
+
+    "custom/timew-elapsed": {
+        "format": "{text}",
+        "exec": "~/dotfiles/timewarrior/get-elapsed-time.sh",
+        "interval": 5,
+    },
+
+    "custom/timew-tag": {
+        "format": "{text}",
+        "exec": "~/dotfiles/timewarrior/get-tag.sh",
+        "interval": 5,
+    }
 }
