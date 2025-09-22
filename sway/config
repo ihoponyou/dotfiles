@@ -11,14 +11,6 @@ set $alt_menu tofi-run | xargs swaymsg exec --
 set $browser librewolf
 set $wallpaper_img ~/dotfiles/wallpaper/thinker.png 
 set $lock_screen swaylock -f -i $wallpaper_img -c 000000 
-
-bindsym $mod+Return exec $term
-bindsym $mod+Shift+q kill
-bindsym $mod+d exec $menu
-bindsym $mod+Shift+d exec $alt_menu
-bindsym $mod+b exec $browser; workspace 3
-bindsym $mod+equal exec ~/dotfiles/timewarrior/set-tag.sh
-
 set $logout swaynag \
     -f 'Monaspace Neon 10' \
     --border-bottom-size 0 \
@@ -26,15 +18,21 @@ set $logout swaynag \
     -m 'Are you sure you want to...' \
     -B 'LOG OUT?' 'swaymsg exit' \
     -s 'No.'
-bindsym $mod+Shift+e exec $logout
+
+bindsym $mod+b exec $browser; workspace 3
+bindsym $mod+d exec $menu
+bindsym $mod+Return exec $term
+bindsym $mod+equal exec ~/dotfiles/timewarrior/set-tag.sh
 bindsym $mod+Shift+c reload
+bindsym $mod+Shift+d exec $alt_menu
+bindsym $mod+Shift+e exec $logout
+bindsym $mod+Shift+q kill
 bindsym $mod+$mod_alt+Shift+l exec $lock_screen
 
 bindsym $mod+$left focus left
 bindsym $mod+$down focus down
 bindsym $mod+$up focus up
 bindsym $mod+$right focus right
-
 bindsym $mod+Shift+$left move left
 bindsym $mod+Shift+$down move down
 bindsym $mod+Shift+$up move up
