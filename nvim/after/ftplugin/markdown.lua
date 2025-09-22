@@ -1,5 +1,5 @@
+vim.bo.wrapmargin = 10
 vim.cmd [[
-	setlocal wrapmargin=10
 	setlocal formatoptions+=t
 	setlocal linebreak
 	setlocal spell

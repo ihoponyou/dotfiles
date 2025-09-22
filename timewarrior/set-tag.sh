@@ -1,6 +1,7 @@
 #!/bin/bash
 
 TAGS=(
+    "CLASS"
     "WORK"
     "WASTE" 
     "STOP"

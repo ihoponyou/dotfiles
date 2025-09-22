@@ -1,1 +1,1 @@
-vim.cmd 'setlocal makeprg=java\\ %'
+vim.bo.makeprg = 'java\\ %'
