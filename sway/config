@@ -146,6 +146,7 @@ exec swayidle -w \
      timeout 1800 '$lock_screen' \
      timeout 3600 'swaymsg "output * power off"' resume 'swaymsg "output * power on"' \
      before-sleep '$lock_screen'
+exec gammastep
 
 # allow systemd units to target the sway session
 exec "systemctl --user import-environment {,WAYLAND_}DISPLAY SWAYSOCK; systemctl --user start sway-session.target"
