@@ -136,11 +136,13 @@
         "format": "{text}",
         "exec": "~/dotfiles/timewarrior/get-elapsed-time.sh",
         "interval": 5,
+        "tooltip": false,
     },
 
     "custom/timew-tag": {
         "format": "{text}",
         "exec": "~/dotfiles/timewarrior/get-tag.sh",
         "interval": 5,
+        "tooltip": false,
     }
 }
