@@ -7,7 +7,7 @@ TAGS=(
     "STOP"
 )
 
-selected=$(printf "%s\n" "${TAGS[@]}" | tofi)
+selected=$(printf "%s\n" "${TAGS[@]}" | tofi --prompt-text='track: ')
 picker_status=$?
 
 if [[ $picker_status -ne 0 || -z "$selected" ]]; then
