@@ -421,6 +421,7 @@ return {
           },
         },
         jdtls = {},
+        tinymist = {},
       }
 
       -- Ensure the servers and tools above are installed
@@ -1021,9 +1022,6 @@ return {
       name = { 'venv', '.venv' },
       auto_refresh = true,
     },
-    keys = {
-      { '<leader>pvs', '<cmd>VenvSelect<cr>' },
-    },
   },
 
   {
@@ -1054,5 +1052,12 @@ return {
       vim.g.mkdp_filetypes = { 'markdown' }
     end,
     ft = { 'markdown' },
+  },
+
+  {
+    'chomosuke/typst-preview.nvim',
+    ft = 'typst',
+    version = '1.*',
+    opts = {},
   },
 }

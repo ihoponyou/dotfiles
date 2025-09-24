@@ -13,10 +13,11 @@
     font-family: "monaspace neon";
     font-weight: 500;
     font-size: 13px;
+    color: @white;
 }
 
 window#waybar {
-    background-color: rgba(0, 0, 0, 0);
+    background-color: transparent;
 }
 
 tooltip {
@@ -24,76 +25,69 @@ tooltip {
     border: 1px solid @yellow;
 }
 
-#clock,
-#tray,
-#cpu,
-#memory,
-#battery,
-#network,
-#pulseaudio,
-#custom-launcher,
-#custom-power,
-#custom-keyboard,
-#scratchpad {
+.module {
+    background-color: @black;
     padding: 4px 6px;
 }
 
+/* cant use ".modules-left *" since styling workspace buttons is weird*/
+#custom-launcher,
+#custom-keyboard,
+#custom-power,
+#custom-scratchpad,
+#mode {
+    margin-right: 4px;
+}
+
+.modules-right * {
+    margin-left: 4px;
+}
+
+#custom-timew-tag {
+    font-weight: 800;
+}
+
+#mode {
+    background-color: transparent;
+    font-weight: 800;
+}
+
+#workspaces {
+    background-color: transparent;
+    padding: 0;
+}
 #workspaces button {
     all: initial;
     min-width: 0;
     padding: 4px 6px;
+    margin-right: 4px;
     background-color: @black;
     color: @white;
-    margin: 0px 4px 0px 0px;
 }
-
 #workspaces button.focused {
     border: 1px solid @yellow;
     color: @yellow;
 }
-
 #workspaces button.urgent {
     background-color: @red;
 }
 
-#scratchpad,
-#custom-launcher,
-#custom-power,
-#custom-keyboard,
-#clock {
-    background-color: @black;
-    color: @white;
-    margin: 0px 4px 0px 0px;
+#cpu.warning,
+#memory.warning {
+    border: 1px solid @yellow;
+    color: @yellow;
 }
 
-#cpu,
-#memory,
-#network,
-#pulseaudio,
-#tray,
-#battery {
-    background-color: @black;
-    color: @white;
-    margin: 0px 0px 0px 4px;
+#cpu.critical,
+#memory.critical {
+    border: 1px solid @red;
+    color: @red;
 }
 
 #battery {
     background-color: @green;
     color: #000;
 }
-
-#cpu.warning,
-#memory.warning {
-    border: 2px solid @yellow;
-    color: @yellow;
-}
-
-#cpu.critical,
-#memory.critical {
-    border: 2px solid @red;
-    color: @red;
-}
-
 #battery.warning {
     background-color: @yellow;
 }
