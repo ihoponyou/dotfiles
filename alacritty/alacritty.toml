@@ -17,4 +17,4 @@ bindings = [
 ]
 
 [terminal]
-shell = "bash"
+shell = "zsh"
