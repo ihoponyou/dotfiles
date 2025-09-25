@@ -14,6 +14,7 @@
         "custom/keyboard",
         "custom/power",
         "custom/screenshot",
+        "custom/quitter",
         "sway/scratchpad",
         "sway/mode",
     ],
@@ -150,6 +151,12 @@
         "format": "{text}",
         "exec": "~/dotfiles/timewarrior/get-tag.sh",
         "interval": 5,
+        "tooltip": false,
+    },
+
+    "custom/quitter": {
+        "format": "quit",
+        "on-click": "swaymsg 'kill'",
         "tooltip": false,
     }
 }
