@@ -10,7 +10,7 @@ set $menu tofi-drun | xargs swaymsg exec --
 set $alt_menu tofi-run | xargs swaymsg exec --
 set $browser librewolf
 set $wallpaper_img ~/dotfiles/wallpaper/thinker.png 
-set $lock_screen swaylock -f -i $wallpaper_img -c 000000 
+set $lock_screen "timew stop; swaylock -f -i $wallpaper_img -c 000000"
 set $logout swaynag \
     -f 'Monaspace Neon 10' \
     --border-bottom-size 0 \
