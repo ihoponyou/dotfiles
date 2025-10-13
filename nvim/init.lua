@@ -138,12 +138,12 @@ if is_godot_project and not is_server_running then
   vim.fn.serverstart(GODOT_NVIM_SERVER_IP)
 end
 
-local lspconfig = require 'lspconfig'
 if is_godot_project then
-  lspconfig.gdscript.setup {
+  vim.lsp.enable 'gdscript'
+  vim.lsp.config('gdscript', {
     name = 'godot',
     cmd = vim.lsp.rpc.connect('127.0.0.1', GODOT_LSP_PORT),
-  }
+  })
 end
 
 vim.cmd ':hi statusline guibg=NONE'
