@@ -454,7 +454,8 @@ return {
             -- by the server configuration above. Useful when disabling
             -- certain features of an LSP (for example, turning off formatting for ts_ls)
             server.capabilities = vim.tbl_deep_extend('force', {}, capabilities, server.capabilities or {})
-            require('lspconfig')[server_name].setup(server)
+            vim.lsp.config(server_name, server)
+            vim.lsp.enable(server_name)
           end,
         },
       }
@@ -696,7 +697,6 @@ return {
       'nvim-neotest/nvim-nio',
       'williamboman/mason.nvim',
       'jay-babu/mason-nvim-dap.nvim',
-      'leoluz/nvim-dap-go',
       'mfussenegger/nvim-dap-python',
     },
     keys = {
@@ -868,14 +868,6 @@ return {
       dap.listeners.before.event_terminated['dapui_config'] = dapui.close
       dap.listeners.before.event_exited['dapui_config'] = dapui.close
 
-      -- Install golang specific config
-      require('dap-go').setup {
-        delve = {
-          -- On Windows delve must be run attached or it crashes.
-          -- See https://github.com/leoluz/nvim-dap-go/blob/main/README.md#configuring
-          detached = vim.fn.has 'win32' == 0,
-        },
-      }
       require('dap-python').setup 'python'
     end,
   },
@@ -886,15 +878,6 @@ return {
     -- See `:help ibl`
     main = 'ibl',
     opts = {},
-  },
-
-  {
-    'lervag/vimtex',
-    lazy = false,
-    init = function()
-      -- VimTeX configuration goes here, e.g.
-      vim.g.vimtex_view_method = 'zathura_simple'
-    end,
   },
 
   { -- You can easily change to a different colorscheme.
@@ -917,11 +900,6 @@ return {
       -- any other, such as 'tokyonight-storm', 'tokyonight-moon', or 'tokyonight-day'.
       vim.cmd.colorscheme 'gruvbox'
     end,
-  },
-
-  {
-    'ShouxTech/rojo.nvim',
-    opts = {},
   },
 
   {
@@ -1007,7 +985,6 @@ return {
 
   {
     'linux-cultist/venv-selector.nvim',
-    branch = 'regexp',
     dependencies = {
       'neovim/nvim-lspconfig',
       'nvim-telescope/telescope.nvim',
@@ -1042,16 +1019,6 @@ return {
         },
       }
     end,
-  },
-
-  {
-    'iamcco/markdown-preview.nvim',
-    cmd = { 'MarkdownPreviewToggle', 'MarkdownPreview', 'MarkdownPreviewStop' },
-    build = 'cd app && yarn install',
-    init = function()
-      vim.g.mkdp_filetypes = { 'markdown' }
-    end,
-    ft = { 'markdown' },
   },
 
   {
