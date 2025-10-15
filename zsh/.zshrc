@@ -104,3 +104,5 @@ source $ZSH/oh-my-zsh.sh
 # alias ohmyzsh="mate ~/.oh-my-zsh"
 
 export MANPAGER='nvim +Man!'
+
+alias ls='ls -A1 --color=auto'
