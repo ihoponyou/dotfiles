@@ -114,5 +114,11 @@ vim.keymap.set('n', '<leader>Ts', require('neotest').summary.toggle, { desc = 'N
 
 vim.cmd ':hi statusline guibg=NONE'
 
+vim.filetype.add {
+  pattern = {
+    ['.*%.py3'] = 'python',
+  },
+}
+
 -- The line beneath this is called `modeline`. See `:help modeline`
 -- vim: ts=2 sts=2 sw=2 et
