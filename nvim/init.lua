@@ -106,6 +106,9 @@ vim.keymap.set('n', '<leader>Trn', require('neotest').run.run, { desc = 'Neo[t]e
 vim.keymap.set('n', '<leader>Tdn', function()
   require('neotest').run.run { suite = false, strategy = 'dap' }
 end, { desc = 'Neo[t]est: [d]ebug [n]earest test' })
+vim.keymap.set('n', '<leader>Tdd', function()
+  require('neotest').run.run { vim.fn.expand '%', strategy = 'dap' }
+end, { desc = 'Neo[t]est: [d]ebug current file' })
 vim.keymap.set('n', '<leader>Trr', function()
   require('neotest').run.run(vim.fn.expand '%')
 end, { desc = 'Neo[T]est: [r]un current file' })
@@ -119,6 +122,8 @@ vim.filetype.add {
     ['.*%.py3'] = 'python',
   },
 }
+
+vim.o.termguicolors = true
 
 -- The line beneath this is called `modeline`. See `:help modeline`
 -- vim: ts=2 sts=2 sw=2 et
