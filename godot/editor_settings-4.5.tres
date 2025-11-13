@@ -66,7 +66,7 @@ export/windows/osslsigncode = ""
 export/windows/wine = ""
 _editor_settings_advanced_mode = true
 _project_settings_advanced_mode = false
-_export_template_download_directory = "/home/noah/Downloads"
+_export_template_download_directory = "/home/noah/.cache/godot"
 _default_feature_profile = ""
 _script_setup_templates_dictionary = {
 "RigidBody3D": "0NodeDefault"
