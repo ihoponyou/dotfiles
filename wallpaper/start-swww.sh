@@ -1,6 +1,6 @@
 #!/bin/bash
 
-IMAGE=$HOME/dotfiles/wallpaper/thinker.png
+IMAGE=$HOME/dotfiles/wallpaper/cycles-1920-1080.png
 
 swww query &> /dev/null
 if [ $? -eq 0 ]
