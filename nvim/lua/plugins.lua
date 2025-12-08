@@ -772,6 +772,7 @@ return {
           'delve',
           'cppdbg',
           'debugpy',
+          'codelldb',
         },
       }
 
@@ -781,10 +782,17 @@ return {
           host = '127.0.0.1',
           port = 6006,
         },
+        cppdbg = {
+          type = 'executable',
+          command = vim.fn.expand '~' .. '/.local/share/vscode-cpptools/extension/debugAdapters/bin/OpenDebugAD7',
+          options = {
+            detached = false,
+          },
+        },
       }
 
       dap.configurations = {
-        c = {
+        cpp = {
           {
             name = 'Launch file',
             type = 'cppdbg',
@@ -793,16 +801,22 @@ return {
               return vim.fn.input('Path to executable: ', vim.fn.getcwd() .. '/', 'file')
             end,
             cwd = '${workspaceFolder}',
-            stopAtEntry = false,
-            MIMode = 'lldb',
+            stopAtEntry = true,
+            setupCommands = {
+              {
+                text = '-enable-pretty-printing',
+                description = 'enable pretty printing',
+                ignoreFailures = false,
+              },
+            },
           },
           {
-            name = 'Attach to lldbserver :1234',
+            name = 'Attach to gdbserver :1234',
             type = 'cppdbg',
             request = 'launch',
-            MIMode = 'lldb',
+            MIMode = 'gdb',
             miDebuggerServerAddress = 'localhost:1234',
-            miDebuggerPath = '/usr/bin/lldb',
+            miDebuggerPath = '/usr/bin/gdb',
             cwd = '${workspaceFolder}',
             program = function()
               return vim.fn.input('Path to executable: ', vim.fn.getcwd() .. '/', 'file')
@@ -829,6 +843,7 @@ return {
           },
         },
       }
+      dap.configurations.c = dap.configurations.cpp
 
       -- Dap UI setup
       -- For more information, see |:help nvim-dap-ui|
@@ -853,16 +868,16 @@ return {
       }
 
       -- Change breakpoint icons
-      -- vim.api.nvim_set_hl(0, 'DapBreak', { fg = '#e51400' })
-      -- vim.api.nvim_set_hl(0, 'DapStop', { fg = '#ffcc00' })
-      -- local breakpoint_icons = vim.g.have_nerd_font
-      --     and { Breakpoint = '', BreakpointCondition = '', BreakpointRejected = '', LogPoint = '', Stopped = '' }
-      --   or { Breakpoint = '●', BreakpointCondition = '⊜', BreakpointRejected = '⊘', LogPoint = '◆', Stopped = '⭔' }
-      -- for type, icon in pairs(breakpoint_icons) do
-      --   local tp = 'Dap' .. type
-      --   local hl = (type == 'Stopped') and 'DapStop' or 'DapBreak'
-      --   vim.fn.sign_define(tp, { text = icon, texthl = hl, numhl = hl })
-      -- end
+      vim.api.nvim_set_hl(0, 'DapBreak', { fg = '#e51400' })
+      vim.api.nvim_set_hl(0, 'DapStop', { fg = '#ffcc00' })
+      local breakpoint_icons = vim.g.have_nerd_font
+          and { Breakpoint = '', BreakpointCondition = '', BreakpointRejected = '', LogPoint = '', Stopped = '' }
+        or { Breakpoint = '●', BreakpointCondition = '⊜', BreakpointRejected = '⊘', LogPoint = '◆', Stopped = '⭔' }
+      for type, icon in pairs(breakpoint_icons) do
+        local tp = 'Dap' .. type
+        local hl = (type == 'Stopped') and 'DapStop' or 'DapBreak'
+        vim.fn.sign_define(tp, { text = icon, texthl = hl, numhl = hl })
+      end
 
       dap.listeners.after.event_initialized['dapui_config'] = dapui.open
       dap.listeners.before.event_terminated['dapui_config'] = dapui.close
