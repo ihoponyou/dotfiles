@@ -75,6 +75,11 @@ _script_setup_use_script_templates = false
 network/debug_adapter/sync_breakpoints = true
 network/language_server/show_native_symbols_in_editor = true
 network/language_server/use_thread = true
+terrain3d/config/alt_key_bind = 0
+terrain3d/dock/slot = 8
+terrain3d/dock/tile_size = 83.0
+terrain3d/dock/floating = false
+terrain3d/dock/always_on_top = true
 shortcuts = [{
 "name": "spatial_editor/viewport_zoom_modifier_1",
 "shortcuts": [SubResource("InputEventKey_uv861")]
