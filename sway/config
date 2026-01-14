@@ -138,6 +138,8 @@ for_window [app_id=librewolf] opacity 1; blur disable;
 for_window [app_id=gimp] opacity 1; blur disable;
 for_window [app_id=blender] opacity 1; blur disable;
 for_window [class="Godot"] opacity 1; blur disable;
+for_window [app_id=aseprite] opacity 1; blur disable;
+for_window [class="krita"] opacity 1; blur disable;
 
 assign [app_id=librewolf] workspace 3
 assign [app_id=vesktop] workspace 4
