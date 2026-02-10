@@ -106,3 +106,5 @@ source $ZSH/oh-my-zsh.sh
 export MANPAGER='nvim +Man!'
 
 alias ls='ls -A1 --color=auto'
+
+fpath+=~/.zfunc; autoload -Uz compinit; compinit
