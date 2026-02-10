@@ -954,35 +954,6 @@ return {
     },
   },
 
-  -- file explorer
-  {
-    'stevearc/oil.nvim',
-    ---@module 'oil'
-    ---@type oil.SetupOpts
-    opts = {
-      default_file_explorer = false,
-      use_default_keymaps = true,
-      view_options = {
-        show_hidden = true,
-      },
-      float = {
-        padding = 16,
-        border = 'solid',
-      },
-    },
-    keys = {
-      {
-        '\\',
-        function()
-          require('oil').toggle_float()
-        end,
-        desc = 'open oil in cwd',
-      },
-    },
-    dependencies = { 'nvim-tree/nvim-web-devicons' },
-    lazy = false,
-  },
-
   -- git tui
   {
     'NeogitOrg/neogit',
@@ -1050,6 +1021,7 @@ return {
     end,
   },
 
+  -- file manager
   {
     'mikavilpas/yazi.nvim',
     version = '*', -- use the latest stable version
@@ -1060,19 +1032,19 @@ return {
     keys = {
       -- 👇 in this section, choose your own keymappings!
       {
-        '<leader>-',
+        '<leader>\\',
         mode = { 'n', 'v' },
         '<cmd>Yazi<cr>',
         desc = 'Open yazi at the current file',
       },
       {
         -- Open in the current working directory
-        '<leader>cw',
+        '\\',
         '<cmd>Yazi cwd<cr>',
         desc = "Open the file manager in nvim's working directory",
       },
       {
-        '<c-up>',
+        '<c-\\>',
         '<cmd>Yazi toggle<cr>',
         desc = 'Resume the last yazi session',
       },
