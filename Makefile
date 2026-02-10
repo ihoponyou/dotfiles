@@ -27,18 +27,19 @@ make-dirs:
 	mkdir -p $(neovim_config_dir)
 
 link: make-dirs
-	ln -sf $(realpath alacritty) $(alacritty_config_dir)
-	ln -sf $(realpath nvim) $(neovim_config_dir)
-	ln -sf $(realpath godot) $(godot_config_dir)
+	ln -sf $(realpath alacritty)	$(alacritty_config_dir)
+	ln -sf $(realpath nvim)			$(neovim_config_dir)
+	ln -sf $(realpath godot)		$(godot_config_dir)
 ifneq ($(OS),Windows_NT)
-	ln -sf $(realpath sway) $(xdg_config_home)
-	ln -sf $(realpath tofi) $(xdg_config_home)
-	ln -sf $(realpath waybar) $(xdg_config_home)
-	ln -sf $(realpath dunst) $(xdg_config_home)
-	ln -sf $(realpath gammastep) $(xdg_config_home)
-	ln -sf $(realpath zsh)/.zshrc $$HOME
-	ln -sf $(realpath zsh)/themes $$HOME/.oh-my-zsh/custom
-	ln -sf $(realpath .tmux.conf) $$HOME
+	ln -sf $(realpath sway)			$(xdg_config_home)
+	ln -sf $(realpath tofi)			$(xdg_config_home)
+	ln -sf $(realpath waybar)		$(xdg_config_home)
+	ln -sf $(realpath dunst)		$(xdg_config_home)
+	ln -sf $(realpath yazi)			$(xdg_config_home)
+	ln -sf $(realpath gammastep)	$(xdg_config_home)
+	ln -sf $(realpath zsh)/.zshrc	$$HOME
+	ln -sf $(realpath zsh)/themes	$$HOME/.oh-my-zsh/custom
+	ln -sf $(realpath .tmux.conf)	$$HOME
 endif
 
 clean:
@@ -51,6 +52,7 @@ ifneq ($(OS),Windows_NT)
 	rm $(xdg_config_home)/waybar
 	rm $(xdg_config_home)/dunst
 	rm $(xdg_config_home)/gammastep
+	rm $(xdg_config_home)/yazi
 	rm $$HOME/.zshrc
 	rm $$HOME/.oh-my-zsh/custom/themes
 	rm $$HOME/.tmux.conf
