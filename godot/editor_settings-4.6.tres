@@ -73,6 +73,7 @@ _project_settings_advanced_mode = true
 _export_template_download_directory = "/home/noah/.cache/godot"
 _default_feature_profile = ""
 _script_setup_templates_dictionary = {
+"Node": "0NodeDefault",
 "RigidBody3D": "0NodeDefault"
 }
 _use_favorites_root_selection = false
