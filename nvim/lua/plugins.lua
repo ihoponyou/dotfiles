@@ -422,6 +422,7 @@ return {
         },
         jdtls = {},
         tinymist = {},
+        ols = {},
       }
 
       -- Ensure the servers and tools above are installed
