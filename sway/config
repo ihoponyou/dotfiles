@@ -127,25 +127,19 @@ client.focused #000000 $yellow #000000 $blue
 # these are the defaults for client.unfocused
 client.focused_inactive #333333 #222222 #888888 #292d2e #222222
 
-blur enable
-blur_xray disable
-blur_passes 2
-blur_radius 3
-blur_brightness 0.7
-
 for_window [tiling] opacity 0.9
-for_window [app_id=librewolf] opacity 1; blur disable;
-for_window [app_id=gimp] opacity 1; blur disable;
-for_window [app_id=blender] opacity 1; blur disable;
-for_window [app_id=aseprite] opacity 1; blur disable;
-for_window [class="krita"] opacity 1; blur disable;
-for_window [class="Godot"] opacity 1; blur disable; floating enable;
+for_window [app_id=librewolf] opacity 1;
+for_window [app_id=gimp] opacity 1;
+for_window [app_id=blender] opacity 1;
+for_window [app_id=aseprite] opacity 1;
+for_window [class="krita"] opacity 1;
+for_window [class="Godot"] opacity 1; floating enable;
 for_window [class="Godot" title="tscn"] floating disable;
 
 assign [app_id=librewolf] workspace 3
 assign [app_id=vesktop] workspace 4
 
-exec_always ~/dotfiles/wallpaper/start-swww.sh
+exec_always ~/dotfiles/wallpaper/start-awww.sh
 exec swayidle -w \
      timeout 1800 '$lock_screen' \
      timeout 3600 'swaymsg "output * power off"' resume 'swaymsg "output * power on"' \

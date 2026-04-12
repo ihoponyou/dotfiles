@@ -37,8 +37,6 @@ ifneq ($(OS),Windows_NT)
 	ln -sf $(realpath dunst)		$(xdg_config_home)
 	ln -sf $(realpath yazi)			$(xdg_config_home)
 	ln -sf $(realpath gammastep)	$(xdg_config_home)
-	ln -sf $(realpath zsh)/.zshrc	$$HOME
-	ln -sf $(realpath zsh)/themes	$$HOME/.oh-my-zsh/custom
 	ln -sf $(realpath .tmux.conf)	$$HOME
 endif
 
@@ -53,8 +51,6 @@ ifneq ($(OS),Windows_NT)
 	rm $(xdg_config_home)/dunst
 	rm $(xdg_config_home)/gammastep
 	rm $(xdg_config_home)/yazi
-	rm $$HOME/.zshrc
-	rm $$HOME/.oh-my-zsh/custom/themes
 	rm $$HOME/.tmux.conf
 endif
 

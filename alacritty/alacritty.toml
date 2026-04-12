@@ -20,4 +20,4 @@ bindings = [
 ]
 
 [terminal]
-shell = "zsh"
+shell = "fish"
